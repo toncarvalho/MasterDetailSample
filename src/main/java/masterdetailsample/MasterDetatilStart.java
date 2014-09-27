@@ -28,7 +28,28 @@ public class MasterDetatilStart extends Application {
         VBox interfacePesquisa = new VBox();
         interfacePesquisa.getChildren().add(new Label("Pesquisa"));
         interfacePesquisa.getChildren().add(ferramentasJanelaPesquisa.getBarraInicializacao());
+        Label statusBar = new Label("Status:");
         vBox.getChildren().add(interfacePesquisa);
+
+        ferramentasJanelaPesquisa.novo.setOnAction(event -> {
+            masterDetailSource.insercaoRegistro(this);
+        });
+
+        ferramentasJanelaPesquisa.alterar.setOnAction(event -> {
+            masterDetailSource.alteracaoRegistro(this);
+        });
+
+        ferramentasJanelaPesquisa.excluir.setOnAction(event -> {
+            masterDetailSource.exclusaoRegistro(this);
+        });
+
+        ferramentasJanelaPesquisa.salvar.setOnAction(event -> {
+            masterDetailSource.fimCadastro(this);
+        });
+
+        ferramentasJanelaPesquisa.cancelar.setOnAction(event -> {
+            masterDetailSource.fimCadastro(this);
+        });
 
         VBox formMaster = new VBox();
         BarraDeFerramentas ferramentasFormularioMaster = new BarraDeFerramentas();
@@ -37,7 +58,7 @@ public class MasterDetatilStart extends Application {
         formMaster.getChildren().add(ferramentasFormularioMaster.getBarraFinalizacao());
         vBox.getChildren().add(formMaster);
 
-        VBox formDetalhe = new VBox();
+      /*  VBox formDetalhe = new VBox();
         BarraDeFerramentas ferramentasFormularioDetalhe = new BarraDeFerramentas();
         masterDetailSource.addMasterDetailListener(ferramentasFormularioDetalhe);
         formDetalhe.getChildren().add(new Label("FORMULÁRIO DETALHE"));
@@ -50,7 +71,7 @@ public class MasterDetatilStart extends Application {
         painelDadosDetalhe.getChildren().add(new Label("Painel de dados do DETALHE"));
         painelDadosDetalhe.getChildren().add(ferramentasPainelDadosDetalhe.getBarraFinalizacao());
         vBox.getChildren().add(painelDadosDetalhe);
-
+*/
         anchorPane.getChildren().add(vBox);
         Scene scene = new Scene(anchorPane);
 
@@ -59,7 +80,7 @@ public class MasterDetatilStart extends Application {
         primaryStage.setTitle("Exemplo Mestre Detalhes");
         primaryStage.show();
 
-        masterDetailSource.inicioCadastro();
-        masterDetailSource.insercaoRegistroDetalhe();
+
+
     }
 }

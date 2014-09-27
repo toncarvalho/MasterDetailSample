@@ -10,9 +10,15 @@ public class MasterDetailSource {
 
     private Collection<MasterDetailListener> listeners = new ArrayList<>();
 
-
     public void inicioCadastro() {
         MasterDetailEvent event = new MasterDetailEvent(this);
+        for (MasterDetailListener listener : cloneListeners()) {
+            listener.inicioCadastro(event);
+        }
+    }
+
+    public void inicioCadastro(Object source) {
+        MasterDetailEvent event = new MasterDetailEvent(source);
         for (MasterDetailListener listener : cloneListeners()) {
             listener.inicioCadastro(event);
         }
@@ -25,8 +31,22 @@ public class MasterDetailSource {
         }
     }
 
+    public void fimCadastro(final Object source) {
+        MasterDetailEvent event = new MasterDetailEvent(source);
+        for (MasterDetailListener listener : cloneListeners()) {
+            listener.fimCadastro(event);
+        }
+    }
+
     public void insercaoRegistro() {
         MasterDetailEvent event = new MasterDetailEvent(this);
+        for (MasterDetailListener listener : cloneListeners()) {
+            listener.insercaoRegistro(event);
+        }
+    }
+
+    public void insercaoRegistro(final Object source) {
+        MasterDetailEvent event = new MasterDetailEvent(source);
         for (MasterDetailListener listener : cloneListeners()) {
             listener.insercaoRegistro(event);
         }
@@ -39,8 +59,22 @@ public class MasterDetailSource {
         }
     }
 
+    public void alteracaoRegistro(final Object source) {
+        MasterDetailEvent event = new MasterDetailEvent(source);
+        for (MasterDetailListener listener : cloneListeners()) {
+            listener.alteracaoRegistro(event);
+        }
+    }
+
     public void exclusaoRegistro() {
         MasterDetailEvent event = new MasterDetailEvent(this);
+        for (MasterDetailListener listener : cloneListeners()) {
+            listener.alteracaoRegistro(event);
+        }
+    }
+
+    public void exclusaoRegistro(final Object source) {
+        MasterDetailEvent event = new MasterDetailEvent(source);
         for (MasterDetailListener listener : cloneListeners()) {
             listener.alteracaoRegistro(event);
         }
@@ -53,6 +87,13 @@ public class MasterDetailSource {
         }
     }
 
+    public void pesquisaRegistro(final Object source) {
+        MasterDetailEvent event = new MasterDetailEvent(source);
+        for (MasterDetailListener listener : cloneListeners()) {
+            listener.pesquisaRegistro(event);
+        }
+    }
+
     public void insercaoRegistroDetalhe() {
         MasterDetailEvent event = new MasterDetailEvent(this);
         for (MasterDetailListener listener : cloneListeners()) {
@@ -60,8 +101,22 @@ public class MasterDetailSource {
         }
     }
 
+    public void insercaoRegistroDetalhe(final Object source) {
+        MasterDetailEvent event = new MasterDetailEvent(source);
+        for (MasterDetailListener listener : cloneListeners()) {
+            listener.insercaoRegistroDetalhe(event);
+        }
+    }
+
     public void alteracaoRegistroDetalhe() {
         MasterDetailEvent event = new MasterDetailEvent(this);
+        for (MasterDetailListener listener : cloneListeners()) {
+            listener.alteracaoRegistroDetalhe(event);
+        }
+    }
+
+    public void alteracaoRegistroDetalhe(final Object source) {
+        MasterDetailEvent event = new MasterDetailEvent(source);
         for (MasterDetailListener listener : cloneListeners()) {
             listener.alteracaoRegistroDetalhe(event);
         }

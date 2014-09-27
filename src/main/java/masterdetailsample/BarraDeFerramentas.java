@@ -13,11 +13,12 @@ public class BarraDeFerramentas implements MasterDetailListener {
     private FormState formState;
     private ToolsMode toolsMode;
 
-    private Button novo = new Button("Novo");
-    private Button alterar = new Button("Alterar");
-    private Button excluir = new Button("Excluir");
-    private Button salvar = new Button("Salvar");
-    private Button cancelar = new Button("Cancelar");
+    public Button novo = new Button("Novo");
+    public Button alterar = new Button("Alterar");
+    public Button excluir = new Button("Excluir");
+    public Button salvar = new Button("Salvar");
+    public Button cancelar = new Button("Cancelar");
+    private ToolBar barra;
 
     public FormState getFormState() {
         return formState;
@@ -159,11 +160,20 @@ public class BarraDeFerramentas implements MasterDetailListener {
 
     public ToolBar getBarraInicializacao() {
         this.toolsMode = ToolsMode.INICIALIZACAO;
-        return new ToolBar(novo, excluir, alterar);
+
+        if (this.barra == null) {
+
+            this.barra = new ToolBar(novo, excluir, alterar);
+        }
+
+        return this.barra;
     }
 
     public ToolBar getBarraFinalizacao() {
         this.toolsMode = ToolsMode.FINALIZACAO;
-        return new ToolBar(salvar, cancelar);
+        if (this.barra == null) {
+            this.barra = new ToolBar(salvar, cancelar);
+        }
+        return this.barra;
     }
 }
