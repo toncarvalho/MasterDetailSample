@@ -36,5 +36,7 @@ public class MasterDetatilStart extends Application {
         primaryStage.setMaximized(true);
         primaryStage.setTitle("Exemplo Mestre Detalhes");
         primaryStage.show();
+
+
     }
 }

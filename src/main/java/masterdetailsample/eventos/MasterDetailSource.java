@@ -90,7 +90,7 @@ public class MasterDetailSource {
     public void exclusaoRegistro(final Object source) {
         MasterDetailEvent event = new MasterDetailEvent(source);
         for (MasterDetailListener listener : cloneListeners()) {
-            listener.alteracaoRegistro(event);
+            listener.exclusaoRegistro(event);
         }
     }
 

@@ -3,6 +3,7 @@ package masterdetailsample.screens;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import masterdetailsample.components.BarraDeFerramentasFinal;
+import masterdetailsample.components.BarraDeStatus;
 import masterdetailsample.eventos.MasterDetailSource;
 
 /**
@@ -15,17 +16,16 @@ public class FormMaster {
     public FormMaster(final MasterDetailSource masterDetailSource) {
         this.masterDetailSource = masterDetailSource;
 
-        BarraDeFerramentasFinal ferramentasFormularioMaster = new BarraDeFerramentasFinal();
+        BarraDeFerramentasFinal ferramentasFormularioMaster = new BarraDeFerramentasFinal(masterDetailSource);
         this.masterDetailSource.addMasterDetailListener(ferramentasFormularioMaster);
         formMaster.getChildren().add(new Label("FORMULÁRIO MASTER"));
         formMaster.getChildren().add(ferramentasFormularioMaster.createBarraFinalizacao());
 
-        ferramentasFormularioMaster.salvar.setOnAction(event -> {
-            masterDetailSource.gravacaoRegistro(this);
-        });
-        ferramentasFormularioMaster.cancelar.setOnAction(event -> {
-            masterDetailSource.cancelamentoRegistro(this);
-        });
+        BarraDeStatus status = new BarraDeStatus();
+        formMaster.getChildren().add(status);
+        this.masterDetailSource.addMasterDetailListener(status);
+
+        formMaster.setPrefSize(200,200);
     }
 
     public VBox getScreen() {
