@@ -10,7 +10,12 @@ public class MasterDetailAdapter implements MasterDetailListener {
     }
 
     @Override
-    public void fimCadastro(final MasterDetailEvent e) {
+    public void gravacaoRegistro(final MasterDetailEvent e) {
+
+    }
+
+    @Override
+    public void cancelamentoRegistro(final MasterDetailEvent e) {
 
     }
 
@@ -51,6 +56,16 @@ public class MasterDetailAdapter implements MasterDetailListener {
 
     @Override
     public void pesquisaRegistroDetalhe(final MasterDetailEvent e) {
+
+    }
+
+    @Override
+    public void gravacaoRegistroDetalhe(final MasterDetailEvent e) {
+
+    }
+
+    @Override
+    public void cancelamentoRegistroDetalhe(final MasterDetailEvent e) {
 
     }
 }

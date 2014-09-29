@@ -9,7 +9,9 @@ public interface MasterDetailListener extends EventListener {
 
     void inicioCadastro(MasterDetailEvent e);
 
-    void fimCadastro(MasterDetailEvent e);
+    void gravacaoRegistro(MasterDetailEvent e);
+
+    void cancelamentoRegistro(MasterDetailEvent e);
 
     void insercaoRegistro(MasterDetailEvent e);
 
@@ -26,4 +28,8 @@ public interface MasterDetailListener extends EventListener {
     void exclusaoRegistroDetalhe(MasterDetailEvent e);
 
     void pesquisaRegistroDetalhe(MasterDetailEvent e);
+
+    void gravacaoRegistroDetalhe(MasterDetailEvent e);
+
+    void cancelamentoRegistroDetalhe(MasterDetailEvent e);
 }

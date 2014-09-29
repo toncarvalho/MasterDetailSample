@@ -24,17 +24,31 @@ public class MasterDetailSource {
         }
     }
 
-    public void fimCadastro() {
+    public void gravacaoRegistro() {
         MasterDetailEvent event = new MasterDetailEvent(this);
         for (MasterDetailListener listener : cloneListeners()) {
-            listener.fimCadastro(event);
+            listener.gravacaoRegistro(event);
         }
     }
 
-    public void fimCadastro(final Object source) {
+    public void gravacaoRegistro(final Object source) {
         MasterDetailEvent event = new MasterDetailEvent(source);
         for (MasterDetailListener listener : cloneListeners()) {
-            listener.fimCadastro(event);
+            listener.gravacaoRegistro(event);
+        }
+    }
+
+    public void cancelamentoRegistro(final Object source) {
+        MasterDetailEvent event = new MasterDetailEvent(source);
+        for (MasterDetailListener listener : cloneListeners()) {
+            listener.cancelamentoRegistro(event);
+        }
+    }
+
+    public void cancelamentoRegistroDetalhe(final Object source) {
+        MasterDetailEvent event = new MasterDetailEvent(source);
+        for (MasterDetailListener listener : cloneListeners()) {
+            listener.cancelamentoRegistroDetalhe(event);
         }
     }
 

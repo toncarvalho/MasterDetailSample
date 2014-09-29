@@ -2,12 +2,13 @@ package masterdetailsample;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import masterdetailsample.eventos.MasterDetailSource;
+import masterdetailsample.screens.FormMaster;
+import masterdetailsample.screens.InterfacePesquisa;
 
 /**
  * Created by ton on 9/26/14.
@@ -21,57 +22,13 @@ public class MasterDetatilStart extends Application {
         VBox vBox = new VBox();
         vBox.setVgrow(anchorPane, Priority.ALWAYS);
         vBox.setFillWidth(true);
+
         MasterDetailSource masterDetailSource = new MasterDetailSource();
 
-        BarraDeFerramentas ferramentasJanelaPesquisa = new BarraDeFerramentas();
-        masterDetailSource.addMasterDetailListener(ferramentasJanelaPesquisa);
-        VBox interfacePesquisa = new VBox();
-        interfacePesquisa.getChildren().add(new Label("Pesquisa"));
-        interfacePesquisa.getChildren().add(ferramentasJanelaPesquisa.getBarraInicializacao());
-        Label statusBar = new Label("Status:");
-        vBox.getChildren().add(interfacePesquisa);
+        vBox.getChildren().add(new InterfacePesquisa(masterDetailSource).getScreen());
 
-        ferramentasJanelaPesquisa.novo.setOnAction(event -> {
-            masterDetailSource.insercaoRegistro(this);
-        });
+        vBox.getChildren().add(new FormMaster(masterDetailSource).getScreen());
 
-        ferramentasJanelaPesquisa.alterar.setOnAction(event -> {
-            masterDetailSource.alteracaoRegistro(this);
-        });
-
-        ferramentasJanelaPesquisa.excluir.setOnAction(event -> {
-            masterDetailSource.exclusaoRegistro(this);
-        });
-
-        ferramentasJanelaPesquisa.salvar.setOnAction(event -> {
-            masterDetailSource.fimCadastro(this);
-        });
-
-        ferramentasJanelaPesquisa.cancelar.setOnAction(event -> {
-            masterDetailSource.fimCadastro(this);
-        });
-
-        VBox formMaster = new VBox();
-        BarraDeFerramentas ferramentasFormularioMaster = new BarraDeFerramentas();
-        masterDetailSource.addMasterDetailListener(ferramentasFormularioMaster);
-        formMaster.getChildren().add(new Label("FORMULÁRIO MASTER"));
-        formMaster.getChildren().add(ferramentasFormularioMaster.getBarraFinalizacao());
-        vBox.getChildren().add(formMaster);
-
-      /*  VBox formDetalhe = new VBox();
-        BarraDeFerramentas ferramentasFormularioDetalhe = new BarraDeFerramentas();
-        masterDetailSource.addMasterDetailListener(ferramentasFormularioDetalhe);
-        formDetalhe.getChildren().add(new Label("FORMULÁRIO DETALHE"));
-        formDetalhe.getChildren().add(ferramentasFormularioDetalhe.getBarraInicializacao());
-        vBox.getChildren().add(formDetalhe);
-
-        VBox painelDadosDetalhe = new VBox();
-        BarraDeFerramentas ferramentasPainelDadosDetalhe = new BarraDeFerramentas();
-        masterDetailSource.addMasterDetailListener(ferramentasPainelDadosDetalhe);
-        painelDadosDetalhe.getChildren().add(new Label("Painel de dados do DETALHE"));
-        painelDadosDetalhe.getChildren().add(ferramentasPainelDadosDetalhe.getBarraFinalizacao());
-        vBox.getChildren().add(painelDadosDetalhe);
-*/
         anchorPane.getChildren().add(vBox);
         Scene scene = new Scene(anchorPane);
 
@@ -79,8 +36,5 @@ public class MasterDetatilStart extends Application {
         primaryStage.setMaximized(true);
         primaryStage.setTitle("Exemplo Mestre Detalhes");
         primaryStage.show();
-
-
-
     }
 }

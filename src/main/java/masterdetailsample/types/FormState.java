@@ -1,4 +1,4 @@
-package masterdetailsample;
+package masterdetailsample.types;
 
 /**
  * Created by ton on 9/26/14.
