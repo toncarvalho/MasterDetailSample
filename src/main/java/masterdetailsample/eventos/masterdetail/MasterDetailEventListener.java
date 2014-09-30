@@ -1,11 +1,11 @@
-package masterdetailsample.eventos;
+package masterdetailsample.eventos.masterdetail;
 
 import java.util.EventListener;
 
 /**
  * Created by ton on 9/26/14.
  */
-public interface MasterDetailListener extends EventListener {
+public interface MasterDetailEventListener extends EventListener {
 
     void inicioCadastro(MasterDetailEvent e);
 
@@ -32,4 +32,8 @@ public interface MasterDetailListener extends EventListener {
     void gravacaoRegistroDetalhe(MasterDetailEvent e);
 
     void cancelamentoRegistroDetalhe(MasterDetailEvent e);
+
+    void selecaoDeIten(MasterDetailEvent event);
+
+    void reiniciaPesquisa(MasterDetailEvent event);
 }

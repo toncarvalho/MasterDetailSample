@@ -1,4 +1,4 @@
-package masterdetailsample.eventos;
+package masterdetailsample.eventos.masterdetail;
 
 import java.util.EventObject;
 

@@ -1,9 +1,9 @@
-package masterdetailsample.eventos;
+package masterdetailsample.eventos.masterdetail;
 
 /**
  * Created by ton on 9/26/14.
  */
-public class MasterDetailAdapter implements MasterDetailListener {
+public class MasterDetailEventAdapter implements MasterDetailEventListener {
     @Override
     public void inicioCadastro(final MasterDetailEvent e) {
 
@@ -66,6 +66,16 @@ public class MasterDetailAdapter implements MasterDetailListener {
 
     @Override
     public void cancelamentoRegistroDetalhe(final MasterDetailEvent e) {
+
+    }
+
+    @Override
+    public void selecaoDeIten(final MasterDetailEvent event) {
+
+    }
+
+    @Override
+    public void reiniciaPesquisa(final MasterDetailEvent event) {
 
     }
 }

@@ -2,17 +2,17 @@ package masterdetailsample.components;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.ToolBar;
-import masterdetailsample.eventos.MasterDetailEvent;
-import masterdetailsample.eventos.MasterDetailListener;
-import masterdetailsample.eventos.MasterDetailSource;
+import masterdetailsample.eventos.masterdetail.MasterDetailEvent;
+import masterdetailsample.eventos.masterdetail.MasterDetailEventListener;
+import masterdetailsample.eventos.masterdetail.MasterDetailEventSource;
 import masterdetailsample.types.FormState;
 
 /**
  * Created by ton on 9/26/14.
  */
-public class BarraDeFerramentasInicial implements MasterDetailListener {
+public class BarraDeFerramentasInicial implements MasterDetailEventListener {
 
-    private final MasterDetailSource masterDetailSource;
+    private final MasterDetailEventSource masterDetailSource;
     private FormState formState;
 
     public Button novo = new Button("Novo");
@@ -21,7 +21,7 @@ public class BarraDeFerramentasInicial implements MasterDetailListener {
 
     private ToolBar barra;
 
-    public BarraDeFerramentasInicial(final MasterDetailSource masterDetailSource) {
+    public BarraDeFerramentasInicial(final MasterDetailEventSource masterDetailSource) {
         this.masterDetailSource = masterDetailSource;
     }
 
@@ -153,6 +153,16 @@ public class BarraDeFerramentasInicial implements MasterDetailListener {
         this.excluir.disableProperty().setValue(false);
 
         System.out.println(" executando: cancelamentoRegistroDetalhe  na barra INICIAL");
+    }
+
+    @Override
+    public void selecaoDeIten(final MasterDetailEvent event) {
+
+    }
+
+    @Override
+    public void reiniciaPesquisa(final MasterDetailEvent event) {
+
     }
 
     public ToolBar createBarraInicializacao() {

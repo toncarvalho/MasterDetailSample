@@ -3,14 +3,14 @@ package masterdetailsample.components;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.HBox;
-import masterdetailsample.eventos.MasterDetailEvent;
-import masterdetailsample.eventos.MasterDetailListener;
+import masterdetailsample.eventos.masterdetail.MasterDetailEvent;
+import masterdetailsample.eventos.masterdetail.MasterDetailEventListener;
 import masterdetailsample.types.FormState;
 
 /**
  * Created by ton on 9/29/14.
  */
-public class BarraDeStatus extends HBox implements MasterDetailListener {
+public class BarraDeStatus extends HBox implements MasterDetailEventListener {
 
     private Label label = new Label();
 
@@ -84,5 +84,17 @@ public class BarraDeStatus extends HBox implements MasterDetailListener {
     @Override
     public void cancelamentoRegistroDetalhe(final MasterDetailEvent e) {
         this.label.textProperty().setValue(" Status: " + FormState.INICIAL.name());
+    }
+
+
+
+    @Override
+    public void selecaoDeIten(final MasterDetailEvent event) {
+
+    }
+
+    @Override
+    public void reiniciaPesquisa(final MasterDetailEvent event) {
+
     }
 }
