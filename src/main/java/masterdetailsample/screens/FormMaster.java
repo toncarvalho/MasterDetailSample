@@ -71,7 +71,9 @@ public class FormMaster implements MasterDetailEventListener {
 
     @Override
     public void cancelamentoRegistro(final MasterDetailEvent e) {
-
+            edtNome.disableProperty().set(true);
+            edtFone.disableProperty().set(true);
+            edtEmail.disableProperty().set(true);
     }
 
     @Override

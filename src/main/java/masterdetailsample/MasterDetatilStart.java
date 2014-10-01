@@ -11,6 +11,7 @@ import masterdetailsample.eventos.masterdetail.MasterDetailEventSource;
 import masterdetailsample.model.DataBase;
 import masterdetailsample.screens.FormMaster;
 import masterdetailsample.screens.InterfacePesquisa;
+import masterdetailsample.services.BackEndService;
 
 /**
  * Created by ton on 9/26/14.
@@ -29,6 +30,10 @@ public class MasterDetatilStart extends Application {
         vBox.setFillWidth(true);
 
         MasterDetailEventSource masterDetailSource = new MasterDetailEventSource();
+
+        BackEndService service = BackEndService.getInstance();
+        service.setEventSource(masterDetailSource);
+        masterDetailSource.addMasterDetailListener(service);
 
         vBox.getChildren().add(new InterfacePesquisa(masterDetailSource).getScreen());
 

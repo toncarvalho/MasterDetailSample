@@ -191,6 +191,4 @@ public class MasterDetailEventSource {
             return (Collection) (((ArrayList) listeners).clone());
         }
     }
-
-
 }

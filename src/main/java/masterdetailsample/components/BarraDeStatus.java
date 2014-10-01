@@ -33,7 +33,7 @@ public class BarraDeStatus extends HBox implements MasterDetailEventListener {
 
     @Override
     public void cancelamentoRegistro(final MasterDetailEvent e) {
-        this.label.textProperty().setValue(" Status: " + FormState.PROCESSANDO.name());
+        this.label.textProperty().setValue(" Status: " + FormState.CANCELANDO.name());
     }
 
     @Override
@@ -85,8 +85,6 @@ public class BarraDeStatus extends HBox implements MasterDetailEventListener {
     public void cancelamentoRegistroDetalhe(final MasterDetailEvent e) {
         this.label.textProperty().setValue(" Status: " + FormState.INICIAL.name());
     }
-
-
 
     @Override
     public void selecaoDeIten(final MasterDetailEvent event) {
