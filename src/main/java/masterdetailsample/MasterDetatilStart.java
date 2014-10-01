@@ -44,8 +44,9 @@ public class MasterDetatilStart extends Application {
         Scene scene = new Scene(anchorPane);
 
         primaryStage.setScene(scene);
-        primaryStage.setMaximized(true);
         primaryStage.setTitle("Exemplo Mestre Detalhes");
         primaryStage.show();
+
+        masterDetailSource.inicioCadastro();
     }
 }

@@ -37,9 +37,9 @@ public class BarraDeFerramentasInicial implements MasterDetailEventListener {
     public void inicioCadastro(final MasterDetailEvent e) {
 
         this.formState = FormState.INICIAL;
-        this.novo.disableProperty().setValue(false);
-        this.alterar.disableProperty().setValue(false);
-        this.excluir.disableProperty().setValue(false);
+        this.novo.disableProperty().set(false);
+        this.alterar.disableProperty().set(true);
+        this.excluir.disableProperty().set(true);
         System.out.println(" executando: inicioCadastro  na barra INICIAL");
     }
 
@@ -91,10 +91,9 @@ public class BarraDeFerramentasInicial implements MasterDetailEventListener {
     @Override
     public void pesquisaRegistro(final MasterDetailEvent e) {
         this.formState = FormState.PESQUISANDO;
-        this.novo.disableProperty().setValue(false);
-        this.alterar.disableProperty().setValue(false);
-        this.excluir.disableProperty().setValue(false);
-
+        this.novo.disableProperty().set(false);
+        this.alterar.disableProperty().set(true);
+        this.excluir.disableProperty().set(true);
         System.out.println(" executando: pesquisaRegistro  na barra INICIAL");
     }
 
@@ -129,9 +128,9 @@ public class BarraDeFerramentasInicial implements MasterDetailEventListener {
     @Override
     public void pesquisaRegistroDetalhe(final MasterDetailEvent e) {
         this.formState = FormState.PESQUISANDO_ITENS_DETALHE;
-        this.novo.disableProperty().setValue(false);
-        this.alterar.disableProperty().setValue(false);
-        this.excluir.disableProperty().setValue(false);
+        this.novo.disableProperty().set(false);
+        this.alterar.disableProperty().set(true);
+        this.excluir.disableProperty().set(true);
         System.out.println(" executando: pesquisaRegistroDetalhe  na barra INICIAL");
     }
 
@@ -157,6 +156,11 @@ public class BarraDeFerramentasInicial implements MasterDetailEventListener {
 
     @Override
     public void selecaoDeIten(final MasterDetailEvent event) {
+        this.formState = FormState.EXIBINDO_REGISTRO_SELECIONADO;
+        this.novo.disableProperty().set(false);
+        this.alterar.disableProperty().set(false);
+        this.excluir.disableProperty().set(false);
+        System.out.println(" executando: selecaoDeIten  na barra INICIAL");
 
     }
 

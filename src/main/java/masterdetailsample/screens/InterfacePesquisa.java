@@ -26,8 +26,9 @@ public class InterfacePesquisa {
     private VBox vBox = new VBox();
     private FormState estado;
 
-    private Button btnPesquisa = new Button("...");
-    private Button btnLimpaGrid = new Button("Reset");
+    private Button btnPesquisa = new Button("Pesquisa");
+    private Button btnLimpaGrid = new Button("Limpra Grid");
+    private Button btnReinicia = new Button("Reinicia");
 
     public InterfacePesquisa(final MasterDetailEventSource masterDetailSource) {
         this.estado = FormState.INICIAL;
@@ -37,7 +38,7 @@ public class InterfacePesquisa {
         this.masterDetailSource.addMasterDetailListener(ferramentasJanelaPesquisa);
         VBox interfacePesquisa = new VBox();
         interfacePesquisa.getChildren().add(new Label("Pesquisa"));
-        interfacePesquisa.getChildren().add(new ToolBar(btnPesquisa, btnLimpaGrid));
+        interfacePesquisa.getChildren().add(new ToolBar(btnPesquisa, btnLimpaGrid,btnReinicia));
 
         Grid grid = new Grid();
         this.masterDetailSource.addMasterDetailListener(grid);
@@ -66,6 +67,10 @@ public class InterfacePesquisa {
 
         btnLimpaGrid.setOnAction(event -> {
             masterDetailSource.reiniciaPesquisa();
+        });
+
+        btnReinicia.setOnAction(event -> {
+            masterDetailSource.inicioCadastro();
         });
     }
 

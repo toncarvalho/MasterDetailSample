@@ -90,7 +90,7 @@ public class BarraDeStatus extends HBox implements MasterDetailEventListener {
 
     @Override
     public void selecaoDeIten(final MasterDetailEvent event) {
-
+        this.label.textProperty().setValue(" Status: " + FormState.EXIBINDO_REGISTRO_SELECIONADO.name());
     }
 
     @Override

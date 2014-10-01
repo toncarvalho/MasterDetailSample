@@ -144,7 +144,8 @@ public class BarraDeFerramentasFinal implements MasterDetailEventListener {
 
     @Override
     public void selecaoDeIten(final MasterDetailEvent event) {
-
+        this.salvar.disableProperty().set(true);
+        this.cancelar.disableProperty().set(true);
     }
 
     @Override

@@ -18,7 +18,14 @@ public class Grid implements MasterDetailEventListener {
 
     @Override
     public void inicioCadastro(final MasterDetailEvent e) {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
 
+                table.itemsProperty().setValue(null);
+
+            }
+        });
     }
 
     @Override
