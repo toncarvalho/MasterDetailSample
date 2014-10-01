@@ -113,11 +113,11 @@ public class Grid implements MasterDetailEventListener {
         nome.setCellValueFactory(new PropertyValueFactory<Pessoa, String>("nome"));
 
         TableColumn fone = new TableColumn("Fone");
-        fone.setMinWidth(100);
+        fone.setMinWidth(110);
         fone.setCellValueFactory(new PropertyValueFactory<Pessoa, String>("fone"));
 
         TableColumn email = new TableColumn("Email");
-        email.setMinWidth(100);
+        email.setMinWidth(200);
         email.setCellValueFactory(new PropertyValueFactory<Pessoa, String>("email"));
 
         table = new javafx.scene.control.TableView();

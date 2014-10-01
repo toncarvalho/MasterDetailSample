@@ -34,7 +34,7 @@ public class InterfacePesquisa implements MasterDetailEventListener {
     private Button btnLimpaGrid = new Button("Limpra Grid");
     private Button btnReinicia = new Button("Reinicia");
 
-    private Pessoa entidade ;
+    private Pessoa entidade;
 
     private ObservableList<Pessoa> pessoaObservableList = FXCollections.observableArrayList();
 
@@ -51,7 +51,13 @@ public class InterfacePesquisa implements MasterDetailEventListener {
         });
 
         ferramentasJanelaPesquisa.alterar.setOnAction(event -> {
-            masterDetailSource.alteracaoRegistro(table.getSelectionModel().selectedItemProperty().get());
+
+            //masterDetailSource.alteracaoRegistro(table.getSelectionModel().selectedItemProperty().get());
+            if (entidade != null) {
+                masterDetailSource.alteracaoRegistro(entidade);
+            } else {
+                System.out.println(" entidade nula, nenhum item selecionado");
+            }
         });
 
         ferramentasJanelaPesquisa.excluir.setOnAction(event -> {
@@ -68,7 +74,6 @@ public class InterfacePesquisa implements MasterDetailEventListener {
             @Override
             public void onChanged(final Change c) {
 
-
                 masterDetailSource.selecaoDeIten(table);
             }
         });
@@ -79,7 +84,7 @@ public class InterfacePesquisa implements MasterDetailEventListener {
         BarraDeStatus status = new BarraDeStatus();
         interfacePesquisa.getChildren().add(status);
         this.masterDetailSource.addMasterDetailListener(status);
-        interfacePesquisa.setPrefSize(400, 200);
+        interfacePesquisa.setPrefSize(400, 250);
         vBox.getChildren().add(interfacePesquisa);
 
         btnPesquisa.setOnAction(event -> {
@@ -117,7 +122,12 @@ public class InterfacePesquisa implements MasterDetailEventListener {
 
     @Override
     public void cancelamentoRegistro(final MasterDetailEvent e) {
-
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                masterDetailSource.pesquisaRegistro();
+            }
+        });
     }
 
     @Override
@@ -144,7 +154,6 @@ public class InterfacePesquisa implements MasterDetailEventListener {
                 table.itemsProperty().setValue(pessoaObservableList);
                 pessoaObservableList.removeAll(FXCollections.observableList(BackEndService.getInstance().getResults()));
                 pessoaObservableList.addAll(FXCollections.observableList(BackEndService.getInstance().getResults()));
-
             }
         });
     }
@@ -181,7 +190,15 @@ public class InterfacePesquisa implements MasterDetailEventListener {
 
     @Override
     public void selecaoDeIten(final MasterDetailEvent event) {
-
+        System.out.println(this.getClass().getName() + " selecionando item");
+        if (event.getSource() != null && event.getSource() instanceof TableView) {
+            TableView<Pessoa> table = (TableView<Pessoa>) event.getSource();
+            if (table.getSelectionModel().getSelectedItem() != null) {
+                entidade = table.getSelectionModel().getSelectedItems().get(0);
+            }
+        } else if (event.getSource() != null && event.getSource() instanceof Pessoa) {
+            entidade = (Pessoa) event.getSource();
+        }
     }
 
     @Override

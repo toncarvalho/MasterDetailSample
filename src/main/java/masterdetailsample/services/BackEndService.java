@@ -9,6 +9,7 @@ import masterdetailsample.eventos.masterdetail.MasterDetailEventListener;
 import masterdetailsample.eventos.masterdetail.MasterDetailEventSource;
 import masterdetailsample.model.DataBase;
 import masterdetailsample.model.Pessoa;
+import masterdetailsample.types.FormState;
 
 /**
  * Created by ton on 10/1/14.
@@ -16,6 +17,8 @@ import masterdetailsample.model.Pessoa;
 public class BackEndService implements MasterDetailEventListener {
 
     private static BackEndService service;
+
+    private FormState estadoInterno = FormState.INICIAL;
 
     private MasterDetailEventSource eventSource;
 
@@ -34,6 +37,7 @@ public class BackEndService implements MasterDetailEventListener {
     public void inicioCadastro(final MasterDetailEvent event) {
         try {
             Thread.sleep(1000);
+            estadoInterno = FormState.INICIAL;
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         }
@@ -51,13 +55,6 @@ public class BackEndService implements MasterDetailEventListener {
             novo.setId(novoId);
             DataBase.getInstance().tbPessoas.add(novo);
             eventSource.pesquisaRegistro();
-            eventSource.selecaoDeIten(novo);
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    eventSource.selecaoDeIten(novo);
-                }
-            });
         } else {
             List<Pessoa> pessoas = DataBase.getInstance().tbPessoas;
             Pessoa antigo = pessoas.stream().filter(Predicate.isEqual(novo)).findFirst().get();
@@ -79,13 +76,22 @@ public class BackEndService implements MasterDetailEventListener {
         DataBase.getInstance().tbPessoas.forEach(pessoa -> {
             System.out.println(pessoa);
         });
+
+        estadoInterno = FormState.INICIAL;
     }
 
     @Override
     public void cancelamentoRegistro(final MasterDetailEvent e) {
         try {
-            Thread.sleep(1000);
+            Thread.sleep(500);
             System.out.println(this.getClass().getName() + " Efetuando Cancelamento!!!");
+            eventSource.pesquisaRegistro();
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    eventSource.selecaoDeIten();
+                }
+            });
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         }
@@ -101,8 +107,8 @@ public class BackEndService implements MasterDetailEventListener {
     @Override
     public void alteracaoRegistro(final MasterDetailEvent e) {
         try {
-            Thread.sleep(1000);
-
+            Thread.sleep(1);
+            estadoInterno = FormState.EDITANDO;
             System.out.println(this.getClass().getName() + " Efetuando Alteração do registro!!!");
         } catch (InterruptedException ex) {
             ex.printStackTrace();

@@ -74,7 +74,7 @@ public class BarraDeFerramentasFinal implements MasterDetailEventListener {
     public void pesquisaRegistro(final MasterDetailEvent e) {
         this.formState = FormState.PESQUISANDO;
 
-        this.salvar.disableProperty().set(false);
+        this.salvar.disableProperty().set(true);
         this.cancelar.disableProperty().set(true);
         System.out.println(" executando: pesquisaRegistro  na BARRA FINAL");
     }
@@ -162,7 +162,5 @@ public class BarraDeFerramentasFinal implements MasterDetailEventListener {
 
     public BarraDeFerramentasFinal(final MasterDetailEventSource masterDetailSource) {
         this.masterDetailSource = masterDetailSource;
-
-
     }
 }
