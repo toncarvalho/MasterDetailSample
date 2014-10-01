@@ -7,14 +7,15 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import masterdetailsample.eventos.masterdetail.MasterDetailEvent;
 import masterdetailsample.eventos.masterdetail.MasterDetailEventListener;
+import masterdetailsample.model.Contato;
 import masterdetailsample.model.Pessoa;
 
 /**
  * Created by ton on 9/30/14.
  */
-public class Grid implements MasterDetailEventListener {
+public class GridSubFormulario implements MasterDetailEventListener {
 
-    private TableView table;
+    private TableView<Contato> table;
 
     @Override
     public void inicioCadastro(final MasterDetailEvent e) {
@@ -23,7 +24,6 @@ public class Grid implements MasterDetailEventListener {
             public void run() {
 
                 table.itemsProperty().setValue(null);
-
             }
         });
     }
@@ -55,7 +55,6 @@ public class Grid implements MasterDetailEventListener {
 
     @Override
     public void pesquisaRegistro(final MasterDetailEvent e) {
-
 
     }
 
@@ -106,7 +105,7 @@ public class Grid implements MasterDetailEventListener {
         });
     }
 
-    public Grid() {
+    public GridSubFormulario() {
 
         TableColumn nome = new TableColumn("Nome");
         nome.setMinWidth(100);
@@ -116,12 +115,8 @@ public class Grid implements MasterDetailEventListener {
         fone.setMinWidth(110);
         fone.setCellValueFactory(new PropertyValueFactory<Pessoa, String>("fone"));
 
-        TableColumn email = new TableColumn("Email");
-        email.setMinWidth(200);
-        email.setCellValueFactory(new PropertyValueFactory<Pessoa, String>("email"));
-
-        table = new javafx.scene.control.TableView();
-        table.getColumns().addAll(nome, fone, email);
+        table = new TableView();
+        table.getColumns().addAll(nome, fone);
 
         table.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     }

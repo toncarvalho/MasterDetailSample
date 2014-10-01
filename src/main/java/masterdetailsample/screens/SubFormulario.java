@@ -11,7 +11,7 @@ import javafx.scene.control.ToolBar;
 import javafx.scene.layout.VBox;
 import masterdetailsample.components.BarraDeFerramentasInicial;
 import masterdetailsample.components.BarraDeStatus;
-import masterdetailsample.components.Grid;
+import masterdetailsample.components.GridSubFormulario;
 import masterdetailsample.eventos.masterdetail.MasterDetailEvent;
 import masterdetailsample.eventos.masterdetail.MasterDetailEventListener;
 import masterdetailsample.eventos.masterdetail.MasterDetailEventSource;
@@ -22,7 +22,7 @@ import masterdetailsample.types.FormState;
 /**
  * Created by ton on 9/29/14.
  */
-public class InterfacePesquisa implements MasterDetailEventListener {
+public class SubFormulario implements MasterDetailEventListener {
 
     private final TableView<Pessoa> table;
 
@@ -38,10 +38,10 @@ public class InterfacePesquisa implements MasterDetailEventListener {
 
     private ObservableList<Pessoa> pessoaObservableList = FXCollections.observableArrayList();
 
-    public InterfacePesquisa(final MasterDetailEventSource masterDetailSource) {
+    public SubFormulario(final MasterDetailEventSource masterDetailSource) {
         this.estado = FormState.INICIAL;
         this.masterDetailSource = masterDetailSource;
-        Grid grid = new Grid();
+        GridSubFormulario grid = new GridSubFormulario();
         this.masterDetailSource.addMasterDetailListener(grid);
         table = grid.getTable();
 
@@ -84,7 +84,7 @@ public class InterfacePesquisa implements MasterDetailEventListener {
         BarraDeStatus status = new BarraDeStatus();
         interfacePesquisa.getChildren().add(status);
         this.masterDetailSource.addMasterDetailListener(status);
-        interfacePesquisa.setPrefSize(400, 250);
+        interfacePesquisa.setPrefSize(300, 250);
         vBox.getChildren().add(interfacePesquisa);
 
         btnPesquisa.setOnAction(event -> {

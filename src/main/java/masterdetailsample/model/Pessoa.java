@@ -1,6 +1,8 @@
 package masterdetailsample.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by ton on 9/30/14.
@@ -12,6 +14,8 @@ public class Pessoa implements Serializable {
     private String nome;
     private String fone;
     private String email;
+
+    private List<Contato> contatosList = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -43,6 +47,14 @@ public class Pessoa implements Serializable {
 
     public void setEmail(final String email) {
         this.email = email;
+    }
+
+    public List<Contato> getContatosList() {
+        return contatosList;
+    }
+
+    public void setContatosList(final List<Contato> contatosList) {
+        this.contatosList = contatosList;
     }
 
     @Override

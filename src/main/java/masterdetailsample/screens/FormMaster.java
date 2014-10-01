@@ -10,11 +10,14 @@ import masterdetailsample.eventos.masterdetail.MasterDetailEvent;
 import masterdetailsample.eventos.masterdetail.MasterDetailEventListener;
 import masterdetailsample.eventos.masterdetail.MasterDetailEventSource;
 import masterdetailsample.model.Pessoa;
+import masterdetailsample.types.FormState;
 
 /**
  * Created by ton on 9/29/14.
  */
 public class FormMaster implements MasterDetailEventListener {
+
+    private FormState estadoInternoDoForm = FormState.INICIAL;
     private VBox formMaster = new VBox();
     private MasterDetailEventSource masterDetailSource;
     private Label lblNome = new Label("None:");
@@ -23,6 +26,7 @@ public class FormMaster implements MasterDetailEventListener {
     private TextField edtFone = new TextField();
     private Label lblEmail = new Label("Email:");
     private TextField edtEmail = new TextField();
+    private BarraDeStatus status = new BarraDeStatus();
 
     private Pessoa entidade;
 
@@ -52,11 +56,14 @@ public class FormMaster implements MasterDetailEventListener {
 
         formMaster.getChildren().add(ferramentasFormularioMaster.createBarraFinalizacao());
 
-        BarraDeStatus status = new BarraDeStatus();
         formMaster.getChildren().add(status);
         this.masterDetailSource.addMasterDetailListener(status);
 
-        formMaster.setPrefSize(400, 200);
+        ////////////////inserção do subormulario de detalhe
+        SubFormulario subFormulario = new SubFormulario(masterDetailSource);
+        formMaster.getChildren().add(subFormulario.getScreen());
+
+        formMaster.setPrefSize(400, 400);
     }
 
     public VBox getScreen() {
@@ -84,13 +91,26 @@ public class FormMaster implements MasterDetailEventListener {
 
     @Override
     public void cancelamentoRegistro(final MasterDetailEvent e) {
-        edtNome.disableProperty().set(true);
-        edtFone.disableProperty().set(true);
-        edtEmail.disableProperty().set(true);
+
+        switch (this.estadoInternoDoForm) {
+        case EDITANDO: {
+            edtNome.disableProperty().set(true);
+            edtFone.disableProperty().set(true);
+            edtEmail.disableProperty().set(true);
+            break;
+        }
+        case INSERINDO: {
+            edtNome.disableProperty().set(true);
+            edtFone.disableProperty().set(true);
+            edtEmail.disableProperty().set(true);
+            break;
+        }
+        }
     }
 
     @Override
     public void insercaoRegistro(final MasterDetailEvent e) {
+        this.estadoInternoDoForm = FormState.INSERINDO;
         entidade = new Pessoa();
         edtNome.disableProperty().set(false);
         edtFone.disableProperty().set(false);
@@ -117,7 +137,12 @@ public class FormMaster implements MasterDetailEventListener {
 
     @Override
     public void pesquisaRegistro(final MasterDetailEvent e) {
-
+        edtNome.textProperty().set("");
+        edtNome.setPromptText("nome");
+        edtFone.textProperty().set("");
+        edtFone.setPromptText("telefone");
+        edtEmail.textProperty().set("");
+        edtEmail.setPromptText("email");
     }
 
     @Override
@@ -184,5 +209,13 @@ public class FormMaster implements MasterDetailEventListener {
     @Override
     public void reiniciaPesquisa(final MasterDetailEvent event) {
 
+    }
+
+    public FormState getEstadoInternoDoForm() {
+        return estadoInternoDoForm;
+    }
+
+    public void setEstadoInternoDoForm(final FormState estadoInternoDoForm) {
+        this.estadoInternoDoForm = estadoInternoDoForm;
     }
 }
