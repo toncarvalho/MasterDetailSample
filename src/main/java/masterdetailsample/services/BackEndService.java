@@ -3,6 +3,7 @@ package masterdetailsample.services;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
+import javafx.application.Platform;
 import masterdetailsample.eventos.masterdetail.MasterDetailEvent;
 import masterdetailsample.eventos.masterdetail.MasterDetailEventListener;
 import masterdetailsample.eventos.masterdetail.MasterDetailEventSource;
@@ -45,9 +46,18 @@ public class BackEndService implements MasterDetailEventListener {
         if (novo.getId() == null) {
             novo.setId(DataBase.getInstance().tbPessoas.stream().count() + 1);
             DataBase.getInstance().tbPessoas.sort(Comparator.comparingLong(obj -> obj.getId()));
-            Long novoId = (DataBase.getInstance().tbPessoas.get(DataBase.getInstance().tbPessoas.size()).getId() + 1);
+
+            Long novoId = (DataBase.getInstance().tbPessoas.get(DataBase.getInstance().tbPessoas.size() - 1).getId() + 1);
             novo.setId(novoId);
             DataBase.getInstance().tbPessoas.add(novo);
+            eventSource.pesquisaRegistro();
+            eventSource.selecaoDeIten(novo);
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    eventSource.selecaoDeIten(novo);
+                }
+            });
         } else {
             List<Pessoa> pessoas = DataBase.getInstance().tbPessoas;
             Pessoa antigo = pessoas.stream().filter(Predicate.isEqual(novo)).findFirst().get();
@@ -55,11 +65,20 @@ public class BackEndService implements MasterDetailEventListener {
             antigo.setNome(novo.getNome());
             antigo.setFone(novo.getFone());
             antigo.setEmail(novo.getEmail());
+            eventSource.pesquisaRegistro();
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    eventSource.selecaoDeIten(antigo);
+                }
+            });
         }
 
-        eventSource.pesquisaRegistro();
-        eventSource.selecaoDeIten();
+        System.out.println(" Lista completa de registros ");
 
+        DataBase.getInstance().tbPessoas.forEach(pessoa -> {
+            System.out.println(pessoa);
+        });
     }
 
     @Override
@@ -75,7 +94,8 @@ public class BackEndService implements MasterDetailEventListener {
     @Override
     public void insercaoRegistro(final MasterDetailEvent e) {
 
-        System.out.println(this.getClass().getName() + " Efetuando Inserção!!!");
+        System.out.println(this.getClass().getName()
+                           + "Inicicizando inserção de novo registro, carregando caixas  de seleção e valores default de componentes!!!");
     }
 
     @Override

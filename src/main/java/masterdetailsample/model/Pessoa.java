@@ -97,4 +97,7 @@ public class Pessoa implements Serializable {
         this.fone = fone;
         this.email = email;
     }
+
+    public Pessoa() {
+    }
 }

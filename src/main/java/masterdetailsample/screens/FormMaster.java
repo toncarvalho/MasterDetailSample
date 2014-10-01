@@ -91,7 +91,16 @@ public class FormMaster implements MasterDetailEventListener {
 
     @Override
     public void insercaoRegistro(final MasterDetailEvent e) {
-
+        entidade = new Pessoa();
+        edtNome.disableProperty().set(false);
+        edtFone.disableProperty().set(false);
+        edtEmail.disableProperty().set(false);
+        edtNome.textProperty().set("");
+        edtNome.setPromptText("nome");
+        edtFone.textProperty().set("");
+        edtFone.setPromptText("telefone");
+        edtEmail.textProperty().set("");
+        edtEmail.setPromptText("email");
     }
 
     @Override
@@ -143,7 +152,8 @@ public class FormMaster implements MasterDetailEventListener {
 
     @Override
     public void selecaoDeIten(final MasterDetailEvent event) {
-        if (event.getSource() != null && event.getSource() instanceof  TableView) {
+        System.out.println(this.getClass().getName() + " selecionando item");
+        if (event.getSource() != null && event.getSource() instanceof TableView) {
             TableView<Pessoa> table = (TableView<Pessoa>) event.getSource();
             if (table.getSelectionModel().getSelectedItem() != null) {
                 entidade = table.getSelectionModel().getSelectedItems().get(0);
@@ -155,7 +165,16 @@ public class FormMaster implements MasterDetailEventListener {
                 edtFone.disableProperty().set(true);
                 edtEmail.disableProperty().set(true);
             }
-        }else{
+        } else if (event.getSource() != null && event.getSource() instanceof Pessoa) {
+            entidade = (Pessoa) event.getSource();
+            edtNome.textProperty().setValue(entidade.getNome());
+            edtFone.textProperty().setValue(entidade.getFone());
+            edtEmail.textProperty().setValue(entidade.getEmail());
+
+            edtNome.disableProperty().set(true);
+            edtFone.disableProperty().set(true);
+            edtEmail.disableProperty().set(true);
+        } else {
             edtNome.disableProperty().set(true);
             edtFone.disableProperty().set(true);
             edtEmail.disableProperty().set(true);
