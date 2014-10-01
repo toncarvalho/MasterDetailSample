@@ -20,7 +20,7 @@ public class BackEndService implements MasterDetailEventListener {
 
     public List<Pessoa> getResults() {
         try {
-            Thread.sleep(1000);
+            Thread.sleep(1);
             return DataBase.getInstance().tbPessoas;
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -56,6 +56,10 @@ public class BackEndService implements MasterDetailEventListener {
             antigo.setFone(novo.getFone());
             antigo.setEmail(novo.getEmail());
         }
+
+        eventSource.pesquisaRegistro();
+        eventSource.selecaoDeIten();
+
     }
 
     @Override

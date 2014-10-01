@@ -35,7 +35,9 @@ public class MasterDetatilStart extends Application {
         service.setEventSource(masterDetailSource);
         masterDetailSource.addMasterDetailListener(service);
 
-        vBox.getChildren().add(new InterfacePesquisa(masterDetailSource).getScreen());
+        InterfacePesquisa interfacePesquisa = new InterfacePesquisa(masterDetailSource);
+        vBox.getChildren().add(interfacePesquisa.getScreen());
+        masterDetailSource.addMasterDetailListener(interfacePesquisa);
 
         FormMaster formMaster = new FormMaster(masterDetailSource);
         masterDetailSource.addMasterDetailListener(formMaster);

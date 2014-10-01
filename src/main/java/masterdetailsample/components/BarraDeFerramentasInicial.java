@@ -172,17 +172,7 @@ public class BarraDeFerramentasInicial implements MasterDetailEventListener {
     public ToolBar createBarraInicializacao() {
         this.barra = new ToolBar(novo, alterar, excluir);
 
-        novo.setOnAction(event -> {
-            masterDetailSource.insercaoRegistro(this.barra);
-        });
 
-        alterar.setOnAction(event -> {
-            masterDetailSource.alteracaoRegistro(this.barra);
-        });
-
-        excluir.setOnAction(event -> {
-            masterDetailSource.exclusaoRegistro(this.barra);
-        });
         return this.barra;
     }
 }

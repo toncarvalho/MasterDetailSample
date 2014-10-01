@@ -24,10 +24,23 @@ public class FormMaster implements MasterDetailEventListener {
     private Label lblEmail = new Label("Email:");
     private TextField edtEmail = new TextField();
 
+    private Pessoa entidade;
+
     public FormMaster(final MasterDetailEventSource masterDetailSource) {
         this.masterDetailSource = masterDetailSource;
 
         BarraDeFerramentasFinal ferramentasFormularioMaster = new BarraDeFerramentasFinal(masterDetailSource);
+
+        ferramentasFormularioMaster.salvar.setOnAction(event -> {
+            entidade.setNome(edtNome.textProperty().getValue());
+            entidade.setFone(edtFone.textProperty().getValue());
+            entidade.setEmail(edtEmail.textProperty().getValue());
+            this.masterDetailSource.gravacaoRegistro(entidade);
+        });
+        ferramentasFormularioMaster.cancelar.setOnAction(event -> {
+            this.masterDetailSource.cancelamentoRegistro(entidade);
+        });
+
         this.masterDetailSource.addMasterDetailListener(ferramentasFormularioMaster);
         formMaster.getChildren().add(new Label("FORMULÁRIO MASTER"));
 
@@ -71,9 +84,9 @@ public class FormMaster implements MasterDetailEventListener {
 
     @Override
     public void cancelamentoRegistro(final MasterDetailEvent e) {
-            edtNome.disableProperty().set(true);
-            edtFone.disableProperty().set(true);
-            edtEmail.disableProperty().set(true);
+        edtNome.disableProperty().set(true);
+        edtFone.disableProperty().set(true);
+        edtEmail.disableProperty().set(true);
     }
 
     @Override
@@ -130,13 +143,19 @@ public class FormMaster implements MasterDetailEventListener {
 
     @Override
     public void selecaoDeIten(final MasterDetailEvent event) {
-        TableView<Pessoa> table = (TableView<Pessoa>) event.getSource();
-        if (table.getSelectionModel().getSelectedItem() != null) {
-            Pessoa pessoa = table.getSelectionModel().getSelectedItems().get(0);
-            edtNome.textProperty().setValue(pessoa.getNome());
-            edtFone.textProperty().setValue(pessoa.getFone());
-            edtEmail.textProperty().setValue(pessoa.getEmail());
+        if (event.getSource() != null && event.getSource() instanceof  TableView) {
+            TableView<Pessoa> table = (TableView<Pessoa>) event.getSource();
+            if (table.getSelectionModel().getSelectedItem() != null) {
+                entidade = table.getSelectionModel().getSelectedItems().get(0);
+                edtNome.textProperty().setValue(entidade.getNome());
+                edtFone.textProperty().setValue(entidade.getFone());
+                edtEmail.textProperty().setValue(entidade.getEmail());
 
+                edtNome.disableProperty().set(true);
+                edtFone.disableProperty().set(true);
+                edtEmail.disableProperty().set(true);
+            }
+        }else{
             edtNome.disableProperty().set(true);
             edtFone.disableProperty().set(true);
             edtEmail.disableProperty().set(true);

@@ -56,7 +56,7 @@ public class Grid implements MasterDetailEventListener {
     @Override
     public void pesquisaRegistro(final MasterDetailEvent e) {
 
-        table.itemsProperty().setValue(e.getSource());
+
     }
 
     @Override

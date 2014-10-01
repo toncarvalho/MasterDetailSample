@@ -163,11 +163,6 @@ public class BarraDeFerramentasFinal implements MasterDetailEventListener {
     public BarraDeFerramentasFinal(final MasterDetailEventSource masterDetailSource) {
         this.masterDetailSource = masterDetailSource;
 
-        salvar.setOnAction(event -> {
-            this.masterDetailSource.gravacaoRegistro(this.barra);
-        });
-        cancelar.setOnAction(event -> {
-            this.masterDetailSource.cancelamentoRegistro(this.barra);
-        });
+
     }
 }
