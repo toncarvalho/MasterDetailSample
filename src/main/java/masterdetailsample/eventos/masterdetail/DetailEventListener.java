@@ -24,4 +24,6 @@ public interface DetailEventListener extends EventListener {
     void cancelamentoRegistroDetalhe(MasterDetailEvent e);
 
     void selecaoDeItenDetalhe(MasterDetailEvent event);
+
+    void inicioCadastroDetalhe(MasterDetailEvent event);
 }

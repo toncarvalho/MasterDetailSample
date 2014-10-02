@@ -69,6 +69,11 @@ public class GridSubFormulario implements DetailEventListener {
 
     }
 
+    @Override
+    public void inicioCadastroDetalhe(final MasterDetailEvent event) {
+
+    }
+
     public GridSubFormulario() {
 
         TableColumn nome = new TableColumn("Nome");

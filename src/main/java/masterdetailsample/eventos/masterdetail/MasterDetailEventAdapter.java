@@ -83,4 +83,9 @@ public class MasterDetailEventAdapter implements MasterEventListener, DetailEven
     public void selecaoDeItenDetalhe(final MasterDetailEvent event) {
 
     }
+
+    @Override
+    public void inicioCadastroDetalhe(final MasterDetailEvent event) {
+
+    }
 }

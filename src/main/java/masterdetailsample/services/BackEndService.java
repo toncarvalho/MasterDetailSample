@@ -187,6 +187,11 @@ public class BackEndService implements MasterEventListener, DetailEventListener 
 
     }
 
+    @Override
+    public void inicioCadastroDetalhe(final MasterDetailEvent event) {
+
+    }
+
     private BackEndService() {
         this.eventSource = eventSource;
     }

@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import masterdetailsample.eventos.masterdetail.MasterDetailEventSource;
 import masterdetailsample.model.DataBase;
 import masterdetailsample.screens.FormMaster;
-import masterdetailsample.screens.InterfacePesquisa;
+import masterdetailsample.screens.InterfacePesquisaMaster;
 import masterdetailsample.services.BackEndService;
 
 /**
@@ -35,7 +35,7 @@ public class MasterDetatilStart extends Application {
         service.setEventSource(masterDetailSource);
         masterDetailSource.addMasterListener(service);
 
-        InterfacePesquisa interfacePesquisa = new InterfacePesquisa(masterDetailSource);
+        InterfacePesquisaMaster interfacePesquisa = new InterfacePesquisaMaster(masterDetailSource);
         vBox.getChildren().add(interfacePesquisa.getScreen());
         masterDetailSource.addMasterListener(interfacePesquisa);
 

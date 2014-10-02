@@ -9,8 +9,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToolBar;
 import javafx.scene.layout.VBox;
-import masterdetailsample.components.BarraDeFerramentasInicial;
-import masterdetailsample.components.BarraDeStatus;
+import masterdetailsample.components.ToolBarInicialMaster;
+import masterdetailsample.components.BarraDeStatusMaster;
 import masterdetailsample.components.Grid;
 import masterdetailsample.eventos.masterdetail.MasterDetailEvent;
 import masterdetailsample.eventos.masterdetail.MasterDetailEventSource;
@@ -22,7 +22,7 @@ import masterdetailsample.types.FormState;
 /**
  * Created by ton on 9/29/14.
  */
-public class InterfacePesquisa implements MasterEventListener {
+public class InterfacePesquisaMaster implements MasterEventListener {
 
     private final TableView<Pessoa> table;
 
@@ -38,14 +38,14 @@ public class InterfacePesquisa implements MasterEventListener {
 
     private ObservableList<Pessoa> pessoaObservableList = FXCollections.observableArrayList();
 
-    public InterfacePesquisa(final MasterDetailEventSource masterDetailSource) {
+    public InterfacePesquisaMaster(final MasterDetailEventSource masterDetailSource) {
         this.estado = FormState.INICIAL;
         this.masterDetailSource = masterDetailSource;
         Grid grid = new Grid();
         this.masterDetailSource.addMasterListener(grid);
         table = grid.getTable();
 
-        BarraDeFerramentasInicial ferramentasJanelaPesquisa = new BarraDeFerramentasInicial(masterDetailSource);
+        ToolBarInicialMaster ferramentasJanelaPesquisa = new ToolBarInicialMaster(masterDetailSource);
         ferramentasJanelaPesquisa.novo.setOnAction(event -> {
             masterDetailSource.insercaoRegistro(ferramentasJanelaPesquisa);
         });
@@ -81,7 +81,7 @@ public class InterfacePesquisa implements MasterEventListener {
         interfacePesquisa.getChildren().add(table);
         interfacePesquisa.getChildren().add(ferramentasJanelaPesquisa.createBarraInicializacao());
 
-        BarraDeStatus status = new BarraDeStatus();
+        BarraDeStatusMaster status = new BarraDeStatusMaster();
         interfacePesquisa.getChildren().add(status);
         this.masterDetailSource.addMasterListener(status);
         interfacePesquisa.setPrefSize(350, 200);

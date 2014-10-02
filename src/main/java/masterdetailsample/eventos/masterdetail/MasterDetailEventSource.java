@@ -234,4 +234,13 @@ public class MasterDetailEventSource {
             return (Collection) (((ArrayList) detailEventListeners).clone());
         }
     }
+
+    public void inicioCadastroDetalhe() {
+        MasterDetailEvent event = new MasterDetailEvent(this);
+        for (DetailEventListener listener : cloneDetailListeners()) {
+            listener.inicioCadastroDetalhe(event);
+        }
+    }
+
+
 }

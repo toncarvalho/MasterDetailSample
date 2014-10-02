@@ -5,8 +5,8 @@ import javafx.scene.control.Separator;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import masterdetailsample.components.BarraDeFerramentasFinal;
-import masterdetailsample.components.BarraDeStatus;
+import masterdetailsample.components.BarraDeStatusMaster;
+import masterdetailsample.components.ToolBarFinalMaster;
 import masterdetailsample.eventos.masterdetail.MasterDetailEvent;
 import masterdetailsample.eventos.masterdetail.MasterDetailEventSource;
 import masterdetailsample.eventos.masterdetail.MasterEventListener;
@@ -27,14 +27,14 @@ public class FormMaster implements MasterEventListener {
     private TextField edtFone = new TextField();
     private Label lblEmail = new Label("Email:");
     private TextField edtEmail = new TextField();
-    private BarraDeStatus status = new BarraDeStatus();
+    private BarraDeStatusMaster status = new BarraDeStatusMaster();
 
     private Pessoa entidade;
 
     public FormMaster(final MasterDetailEventSource masterDetailSource) {
         this.masterDetailSource = masterDetailSource;
 
-        BarraDeFerramentasFinal ferramentasFormularioMaster = new BarraDeFerramentasFinal(masterDetailSource);
+        ToolBarFinalMaster ferramentasFormularioMaster = new ToolBarFinalMaster(masterDetailSource);
 
         ferramentasFormularioMaster.salvar.setOnAction(event -> {
             entidade.setNome(edtNome.textProperty().getValue());
@@ -57,14 +57,15 @@ public class FormMaster implements MasterEventListener {
 
         formMaster.getChildren().add(ferramentasFormularioMaster.createBarraFinalizacao());
 
-        BarraDeStatus status = new BarraDeStatus();
+        BarraDeStatusMaster status = new BarraDeStatusMaster();
         formMaster.getChildren().add(status);
         this.masterDetailSource.addMasterListener(status);
 
         ////////////////inserção do subormulario de detalhe
-        SubFormulario subFormulario = new SubFormulario(masterDetailSource);
+        FormDetail subFormulario = new FormDetail(masterDetailSource);
+
         formMaster.getChildren().add(new Separator());
-        formMaster.getChildren().add(new Separator());
+
         formMaster.getChildren().add(subFormulario.getScreen());
 
         formMaster.setPrefSize(400, 400);
