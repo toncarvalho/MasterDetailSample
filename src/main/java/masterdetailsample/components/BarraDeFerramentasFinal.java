@@ -32,8 +32,6 @@ public class BarraDeFerramentasFinal implements MasterDetailEventListener {
         this.formState = FormState.INICIAL;
         this.salvar.disableProperty().setValue(true);
         this.cancelar.disableProperty().setValue(true);
-
-        System.out.println(" executando: inicioCadastro  na BARRA FINAL");
     }
 
     @Override
@@ -41,7 +39,6 @@ public class BarraDeFerramentasFinal implements MasterDetailEventListener {
         this.formState = FormState.PROCESSANDO;
         this.salvar.disableProperty().setValue(true);
         this.cancelar.disableProperty().setValue(true);
-        System.out.println(" executando: gravacaoRegistro  na BARRA FINAL");
     }
 
     @Override
@@ -49,7 +46,6 @@ public class BarraDeFerramentasFinal implements MasterDetailEventListener {
         this.formState = FormState.INSERINDO;
         this.salvar.disableProperty().set(false);
         this.cancelar.disableProperty().set(false);
-        System.out.println(" executando: insercaoRegistro  na BARRA FINAL");
     }
 
     @Override
@@ -57,8 +53,6 @@ public class BarraDeFerramentasFinal implements MasterDetailEventListener {
         this.formState = FormState.EDITANDO;
         this.salvar.disableProperty().set(false);
         this.cancelar.disableProperty().set(false);
-
-        System.out.println(" executando: alteracaoRegistro  na BARRA FINAL");
     }
 
     @Override
@@ -66,8 +60,6 @@ public class BarraDeFerramentasFinal implements MasterDetailEventListener {
         this.formState = FormState.EXCLUINDO;
         this.salvar.disableProperty().set(true);
         this.cancelar.disableProperty().set(false);
-
-        System.out.println(" executando: exclusaoRegistro  na BARRA FINAL");
     }
 
     @Override
@@ -76,7 +68,6 @@ public class BarraDeFerramentasFinal implements MasterDetailEventListener {
 
         this.salvar.disableProperty().set(true);
         this.cancelar.disableProperty().set(true);
-        System.out.println(" executando: pesquisaRegistro  na BARRA FINAL");
     }
 
     @Override
@@ -85,8 +76,6 @@ public class BarraDeFerramentasFinal implements MasterDetailEventListener {
 
         this.salvar.disableProperty().set(false);
         this.cancelar.disableProperty().set(false);
-
-        System.out.println(" executando: insercaoRegistroDetalhe  na BARRA FINAL");
     }
 
     @Override
@@ -95,8 +84,6 @@ public class BarraDeFerramentasFinal implements MasterDetailEventListener {
 
         this.salvar.disableProperty().set(false);
         this.cancelar.disableProperty().set(false);
-
-        System.out.println(" executando: alteracaoRegistroDetalhe  na BARRA FINAL");
     }
 
     @Override
@@ -104,8 +91,6 @@ public class BarraDeFerramentasFinal implements MasterDetailEventListener {
         this.formState = FormState.EXCLUINDO_DETALHE;
         this.salvar.disableProperty().set(true);
         this.cancelar.disableProperty().set(false);
-
-        System.out.println(" executando: exclusaoRegistroDetalhe  na BARRA FINAL");
     }
 
     @Override
@@ -114,8 +99,6 @@ public class BarraDeFerramentasFinal implements MasterDetailEventListener {
 
         this.salvar.disableProperty().setValue(true);
         this.cancelar.disableProperty().setValue(true);
-
-        System.out.println(" executando: pesquisaRegistroDetalhe  na BARRA FINAL");
     }
 
     @Override
@@ -123,7 +106,6 @@ public class BarraDeFerramentasFinal implements MasterDetailEventListener {
         this.formState = FormState.PROCESSANDO;
         this.salvar.disableProperty().setValue(true);
         this.cancelar.disableProperty().setValue(true);
-        System.out.println(" executando: gravacaoRegistroDetalhe  na BARRA FINAL");
     }
 
     @Override
@@ -131,7 +113,6 @@ public class BarraDeFerramentasFinal implements MasterDetailEventListener {
         this.formState = FormState.PROCESSANDO;
         this.salvar.disableProperty().setValue(true);
         this.cancelar.disableProperty().setValue(true);
-        System.out.println(" executando: cancelamentoRegistro  na BARRA FINAL");
     }
 
     @Override
@@ -139,7 +120,6 @@ public class BarraDeFerramentasFinal implements MasterDetailEventListener {
         this.formState = FormState.PROCESSANDO;
         this.salvar.disableProperty().setValue(true);
         this.cancelar.disableProperty().setValue(true);
-        System.out.println(" executando: cancelamentoRegistroDetalhe  na BARRA FINAL");
     }
 
     @Override

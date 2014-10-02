@@ -1,6 +1,7 @@
 package masterdetailsample.screens;
 
 import javafx.scene.control.Label;
+import javafx.scene.control.Separator;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -61,6 +62,8 @@ public class FormMaster implements MasterDetailEventListener {
 
         ////////////////inserção do subormulario de detalhe
         SubFormulario subFormulario = new SubFormulario(masterDetailSource);
+        formMaster.getChildren().add(new Separator());
+        formMaster.getChildren().add(new Separator());
         formMaster.getChildren().add(subFormulario.getScreen());
 
         formMaster.setPrefSize(400, 400);

@@ -1,13 +1,12 @@
 package masterdetailsample.screens;
 
+import java.util.ArrayList;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
-import javafx.scene.control.ToolBar;
 import javafx.scene.layout.VBox;
 import masterdetailsample.components.BarraDeFerramentasInicial;
 import masterdetailsample.components.BarraDeStatus;
@@ -15,8 +14,8 @@ import masterdetailsample.components.GridSubFormulario;
 import masterdetailsample.eventos.masterdetail.MasterDetailEvent;
 import masterdetailsample.eventos.masterdetail.MasterDetailEventListener;
 import masterdetailsample.eventos.masterdetail.MasterDetailEventSource;
+import masterdetailsample.model.Contato;
 import masterdetailsample.model.Pessoa;
-import masterdetailsample.services.BackEndService;
 import masterdetailsample.types.FormState;
 
 /**
@@ -24,90 +23,73 @@ import masterdetailsample.types.FormState;
  */
 public class SubFormulario implements MasterDetailEventListener {
 
-    private final TableView<Pessoa> table;
+    private final TableView<Contato> tableContato;
 
     private MasterDetailEventSource masterDetailSource;
     private VBox vBox = new VBox();
     private FormState estado;
 
-    private Button btnPesquisa = new Button("Pesquisa");
-    private Button btnLimpaGrid = new Button("Limpra Grid");
-    private Button btnReinicia = new Button("Reinicia");
+    private Contato entidadeDetalhe;
 
-    private Pessoa entidade;
-
-    private ObservableList<Pessoa> pessoaObservableList = FXCollections.observableArrayList();
+    private ObservableList<Contato> contatoObservableList = FXCollections.observableArrayList();
 
     public SubFormulario(final MasterDetailEventSource masterDetailSource) {
         this.estado = FormState.INICIAL;
         this.masterDetailSource = masterDetailSource;
         GridSubFormulario grid = new GridSubFormulario();
         this.masterDetailSource.addMasterDetailListener(grid);
-        table = grid.getTable();
+        tableContato = grid.getTable();
 
-        BarraDeFerramentasInicial ferramentasJanelaPesquisa = new BarraDeFerramentasInicial(masterDetailSource);
-        ferramentasJanelaPesquisa.novo.setOnAction(event -> {
-            masterDetailSource.insercaoRegistro(ferramentasJanelaPesquisa);
+        //se adicionando à cadeia de ouvintes
+        this.masterDetailSource.addMasterDetailListener(this);
+
+        BarraDeFerramentasInicial ferramentasInicialDetalhe = new BarraDeFerramentasInicial(masterDetailSource);
+        ferramentasInicialDetalhe.novo.setOnAction(event -> {
+            masterDetailSource.insercaoRegistroDetalhe(ferramentasInicialDetalhe);
         });
 
-        ferramentasJanelaPesquisa.alterar.setOnAction(event -> {
+        ferramentasInicialDetalhe.alterar.setOnAction(event -> {
 
-            //masterDetailSource.alteracaoRegistro(table.getSelectionModel().selectedItemProperty().get());
-            if (entidade != null) {
-                masterDetailSource.alteracaoRegistro(entidade);
+            if (entidadeDetalhe != null) {
+                masterDetailSource.alteracaoRegistroDetalhe(entidadeDetalhe);
             } else {
-                System.out.println(" entidade nula, nenhum item selecionado");
+                System.out.println(" entidadeDetalhe nula, nenhum item selecionado");
             }
         });
 
-        ferramentasJanelaPesquisa.excluir.setOnAction(event -> {
-            masterDetailSource.exclusaoRegistro(ferramentasJanelaPesquisa);
+        ferramentasInicialDetalhe.excluir.setOnAction(event -> {
+            masterDetailSource.exclusaoRegistroDetalhe(ferramentasInicialDetalhe);
         });
 
-        this.masterDetailSource.addMasterDetailListener(ferramentasJanelaPesquisa);
-        VBox interfacePesquisa = new VBox();
-        interfacePesquisa.getChildren().add(new Label("Pesquisa"));
-        interfacePesquisa.getChildren().add(new ToolBar(btnPesquisa, btnLimpaGrid, btnReinicia));
+        this.masterDetailSource.addMasterDetailListener(ferramentasInicialDetalhe);
+        VBox boxDetalhe = new VBox();
+        boxDetalhe.getChildren().add(new Label("SUBFORMULÁRIO CONTATOS"));
 
-        table.setFocusTraversable(false);
-        table.getSelectionModel().getSelectedItems().addListener(new ListChangeListener() {
+        tableContato.setFocusTraversable(false);
+        tableContato.getSelectionModel().getSelectedItems().addListener(new ListChangeListener() {
             @Override
             public void onChanged(final Change c) {
 
-                masterDetailSource.selecaoDeIten(table);
+                masterDetailSource.selecaoDeItenDetalhe(tableContato);
             }
         });
 
-        interfacePesquisa.getChildren().add(table);
-        interfacePesquisa.getChildren().add(ferramentasJanelaPesquisa.createBarraInicializacao());
+        boxDetalhe.getChildren().add(tableContato);
+        boxDetalhe.getChildren().add(ferramentasInicialDetalhe.createBarraInicializacao());
 
         BarraDeStatus status = new BarraDeStatus();
-        interfacePesquisa.getChildren().add(status);
+        boxDetalhe.getChildren().add(status);
         this.masterDetailSource.addMasterDetailListener(status);
-        interfacePesquisa.setPrefSize(300, 250);
-        vBox.getChildren().add(interfacePesquisa);
-
-        btnPesquisa.setOnAction(event -> {
-
-            masterDetailSource.pesquisaRegistro();
-        });
-
-        btnLimpaGrid.setOnAction(event -> {
-
-            masterDetailSource.reiniciaPesquisa();
-        });
-
-        btnReinicia.setOnAction(event -> {
-            masterDetailSource.inicioCadastro();
-        });
+        boxDetalhe.setPrefSize(300, 250);
+        vBox.getChildren().add(boxDetalhe);
     }
 
     public VBox getScreen() {
         return this.vBox;
     }
 
-    public TableView<Pessoa> getTable() {
-        return table;
+    public TableView<Contato> getTableContato() {
+        return tableContato;
     }
 
     @Override
@@ -148,61 +130,91 @@ public class SubFormulario implements MasterDetailEventListener {
     @Override
     public void pesquisaRegistro(final MasterDetailEvent e) {
 
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                table.itemsProperty().setValue(pessoaObservableList);
-                pessoaObservableList.removeAll(FXCollections.observableList(BackEndService.getInstance().getResults()));
-                pessoaObservableList.addAll(FXCollections.observableList(BackEndService.getInstance().getResults()));
-            }
-        });
+        System.out.println("ouviu o evento pesquisaRegistro em: " + this.getClass().getName());
+        //this.contatoObservableList = FXCollections.observableList( new ArrayList<Contato>());
     }
 
     @Override
     public void insercaoRegistroDetalhe(final MasterDetailEvent e) {
-
+        System.out.println("ouviu o evento insercaoRegistroDetalhe em: " + this.getClass().getName());
     }
 
     @Override
     public void alteracaoRegistroDetalhe(final MasterDetailEvent e) {
-
+        System.out.println("ouviu o evento alteracaoRegistroDetalhe em: " + this.getClass().getName());
     }
 
     @Override
     public void exclusaoRegistroDetalhe(final MasterDetailEvent e) {
-
+        System.out.println("ouviu o evento exclusaoRegistroDetalhe em: " + this.getClass().getName());
     }
 
     @Override
     public void pesquisaRegistroDetalhe(final MasterDetailEvent e) {
-
+        System.out.println("ouviu o evento pesquisaRegistroDetalhe em: " + this.getClass().getName());
     }
 
     @Override
     public void gravacaoRegistroDetalhe(final MasterDetailEvent e) {
-
+        System.out.println("ouviu o evento gravacaoRegistroDetalhe em: " + this.getClass().getName());
     }
 
     @Override
     public void cancelamentoRegistroDetalhe(final MasterDetailEvent e) {
-
+        System.out.println("ouviu o evento cancelamentoRegistroDetalhe em: " + this.getClass().getName());
     }
 
     @Override
     public void selecaoDeIten(final MasterDetailEvent event) {
-        System.out.println(this.getClass().getName() + " selecionando item");
+
+        System.out.println("ouviu o evento selecaoDeIten em: " + this.getClass().getName());
+        tableContato.itemsProperty().setValue(contatoObservableList);
+
         if (event.getSource() != null && event.getSource() instanceof TableView) {
-            TableView<Pessoa> table = (TableView<Pessoa>) event.getSource();
-            if (table.getSelectionModel().getSelectedItem() != null) {
-                entidade = table.getSelectionModel().getSelectedItems().get(0);
+            TableView<Pessoa> tablePessoas = (TableView<Pessoa>) event.getSource();
+            if (tablePessoas.getSelectionModel().getSelectedItem() != null) {
+                Pessoa pessoa = tablePessoas.getSelectionModel().getSelectedItems().get(0);
+                System.out.println(" contatos da pessoa: " + pessoa.getNome());
+                pessoa.getContatosList().stream().forEach(obj -> {
+                    System.out.println(obj);
+                });
+
+                if (!pessoa.getContatosList().isEmpty()) {
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            contatoObservableList.clear();
+                            contatoObservableList.addAll(pessoa.getContatosList());
+                        }
+                    });
+                } else {
+                    this.tableContato.itemsProperty().setValue(FXCollections.observableList(new ArrayList<>()));
+                }
             }
         } else if (event.getSource() != null && event.getSource() instanceof Pessoa) {
-            entidade = (Pessoa) event.getSource();
+            Pessoa pessoa = (Pessoa) event.getSource();
+            System.out.println(" contatos da pessoa: " + pessoa.getNome());
+            pessoa.getContatosList().stream().forEach(obj -> {
+                System.out.println(obj);
+            });
+
+            if (!pessoa.getContatosList().isEmpty()) {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        contatoObservableList.clear();
+                        contatoObservableList.addAll(pessoa.getContatosList());
+                    }
+                });
+            } else {
+                this.tableContato.itemsProperty().setValue(FXCollections.observableList(new ArrayList<>()));
+            }
         }
     }
 
     @Override
     public void reiniciaPesquisa(final MasterDetailEvent event) {
-
+        System.out.println("ouviu o evento reiniciaPesquisa em: " + this.getClass().getName());
     }
 }

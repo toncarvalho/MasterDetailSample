@@ -152,8 +152,8 @@ public class InterfacePesquisa implements MasterDetailEventListener {
             @Override
             public void run() {
                 table.itemsProperty().setValue(pessoaObservableList);
-                pessoaObservableList.removeAll(FXCollections.observableList(BackEndService.getInstance().getResults()));
-                pessoaObservableList.addAll(FXCollections.observableList(BackEndService.getInstance().getResults()));
+                pessoaObservableList.removeAll(FXCollections.observableList(BackEndService.getInstance().getPessoas()));
+                pessoaObservableList.addAll(FXCollections.observableList(BackEndService.getInstance().getPessoas()));
             }
         });
     }

@@ -40,7 +40,6 @@ public class BarraDeFerramentasInicial implements MasterDetailEventListener {
         this.novo.disableProperty().set(false);
         this.alterar.disableProperty().set(true);
         this.excluir.disableProperty().set(true);
-        System.out.println(" executando: inicioCadastro  na barra INICIAL");
     }
 
     @Override
@@ -49,7 +48,6 @@ public class BarraDeFerramentasInicial implements MasterDetailEventListener {
         this.novo.disableProperty().setValue(false);
         this.alterar.disableProperty().setValue(false);
         this.excluir.disableProperty().setValue(false);
-        System.out.println(" executando: gravacaoRegistro  na barra INICIAL");
     }
 
     @Override
@@ -58,7 +56,6 @@ public class BarraDeFerramentasInicial implements MasterDetailEventListener {
         this.novo.disableProperty().setValue(false);
         this.alterar.disableProperty().setValue(false);
         this.excluir.disableProperty().setValue(false);
-        System.out.println(" executando: cancelamentoRegistro  na barra INICIAL");
     }
 
     @Override
@@ -67,7 +64,6 @@ public class BarraDeFerramentasInicial implements MasterDetailEventListener {
         this.novo.disableProperty().set(true);
         this.alterar.disableProperty().set(true);
         this.excluir.disableProperty().set(true);
-        System.out.println(" executando: insercaoRegistro  na barra INICIAL");
     }
 
     @Override
@@ -76,7 +72,6 @@ public class BarraDeFerramentasInicial implements MasterDetailEventListener {
         this.novo.disableProperty().set(true);
         this.alterar.disableProperty().set(true);
         this.excluir.disableProperty().set(true);
-        System.out.println(" executando: alteracaoRegistro  na barra INICIAL");
     }
 
     @Override
@@ -85,7 +80,6 @@ public class BarraDeFerramentasInicial implements MasterDetailEventListener {
         this.novo.disableProperty().set(true);
         this.alterar.disableProperty().set(true);
         this.excluir.disableProperty().set(true);
-        System.out.println(" executando: exclusaoRegistro  na barra INICIAL");
     }
 
     @Override
@@ -94,7 +88,6 @@ public class BarraDeFerramentasInicial implements MasterDetailEventListener {
         this.novo.disableProperty().set(false);
         this.alterar.disableProperty().set(true);
         this.excluir.disableProperty().set(true);
-        System.out.println(" executando: pesquisaRegistro  na barra INICIAL");
     }
 
     @Override
@@ -103,7 +96,6 @@ public class BarraDeFerramentasInicial implements MasterDetailEventListener {
         this.novo.disableProperty().setValue(false);
         this.alterar.disableProperty().setValue(false);
         this.excluir.disableProperty().setValue(false);
-        System.out.println(" executando: insercaoRegistroDetalhe  na barra INICIAL");
     }
 
     @Override
@@ -112,7 +104,6 @@ public class BarraDeFerramentasInicial implements MasterDetailEventListener {
         this.novo.disableProperty().setValue(false);
         this.alterar.disableProperty().setValue(false);
         this.excluir.disableProperty().setValue(false);
-        System.out.println(" executando: alteracaoRegistroDetalhe  na barra INICIAL");
     }
 
     @Override
@@ -121,8 +112,6 @@ public class BarraDeFerramentasInicial implements MasterDetailEventListener {
         this.novo.disableProperty().setValue(false);
         this.alterar.disableProperty().setValue(false);
         this.excluir.disableProperty().setValue(false);
-
-        System.out.println(" executando: exclusaoRegistroDetalhe  na barra INICIAL");
     }
 
     @Override
@@ -131,7 +120,6 @@ public class BarraDeFerramentasInicial implements MasterDetailEventListener {
         this.novo.disableProperty().set(false);
         this.alterar.disableProperty().set(true);
         this.excluir.disableProperty().set(true);
-        System.out.println(" executando: pesquisaRegistroDetalhe  na barra INICIAL");
     }
 
     @Override
@@ -140,8 +128,6 @@ public class BarraDeFerramentasInicial implements MasterDetailEventListener {
         this.novo.disableProperty().setValue(false);
         this.alterar.disableProperty().setValue(false);
         this.excluir.disableProperty().setValue(false);
-
-        System.out.println(" executando: gravacaoRegistroDetalhe  na barra INICIAL");
     }
 
     @Override
@@ -150,8 +136,6 @@ public class BarraDeFerramentasInicial implements MasterDetailEventListener {
         this.novo.disableProperty().setValue(false);
         this.alterar.disableProperty().setValue(false);
         this.excluir.disableProperty().setValue(false);
-
-        System.out.println(" executando: cancelamentoRegistroDetalhe  na barra INICIAL");
     }
 
     @Override
@@ -160,8 +144,6 @@ public class BarraDeFerramentasInicial implements MasterDetailEventListener {
         this.novo.disableProperty().set(false);
         this.alterar.disableProperty().set(false);
         this.excluir.disableProperty().set(false);
-        System.out.println(" executando: selecaoDeIten  na barra INICIAL");
-
     }
 
     @Override
@@ -171,7 +153,6 @@ public class BarraDeFerramentasInicial implements MasterDetailEventListener {
 
     public ToolBar createBarraInicializacao() {
         this.barra = new ToolBar(novo, alterar, excluir);
-
 
         return this.barra;
     }

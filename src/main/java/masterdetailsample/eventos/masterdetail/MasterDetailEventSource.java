@@ -8,7 +8,7 @@ import java.util.Collection;
  */
 public class MasterDetailEventSource {
 
-    private Collection<MasterDetailEventListener> listeners = new ArrayList<>();
+    private Collection<MasterDetailEventListener> listeners = new ArrayList<MasterDetailEventListener>();
 
     public void inicioCadastro() {
         MasterDetailEvent event = new MasterDetailEvent(this);
@@ -143,6 +143,13 @@ public class MasterDetailEventSource {
         }
     }
 
+    public void exclusaoRegistroDetalhe(final Object source) {
+        MasterDetailEvent event = new MasterDetailEvent(source);
+        for (MasterDetailEventListener listener : cloneListeners()) {
+            listener.exclusaoRegistroDetalhe(event);
+        }
+    }
+
     public void pesquisaRegistroDetalhe() {
         MasterDetailEvent event = new MasterDetailEvent(this);
         for (MasterDetailEventListener listener : cloneListeners()) {
@@ -158,6 +165,20 @@ public class MasterDetailEventSource {
     }
 
     public void selecaoDeIten() {
+        MasterDetailEvent event = new MasterDetailEvent(this);
+        for (MasterDetailEventListener listener : cloneListeners()) {
+            listener.selecaoDeIten(event);
+        }
+    }
+
+    public void selecaoDeItenDetalhe(final Object source) {
+        MasterDetailEvent event = new MasterDetailEvent(source);
+        for (MasterDetailEventListener listener : cloneListeners()) {
+            listener.selecaoDeIten(event);
+        }
+    }
+
+    public void selecaoDeItenDetalhe() {
         MasterDetailEvent event = new MasterDetailEvent(this);
         for (MasterDetailEventListener listener : cloneListeners()) {
             listener.selecaoDeIten(event);

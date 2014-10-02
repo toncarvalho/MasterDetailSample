@@ -22,7 +22,7 @@ public class BackEndService implements MasterDetailEventListener {
 
     private MasterDetailEventSource eventSource;
 
-    public List<Pessoa> getResults() {
+    public List<Pessoa> getPessoas() {
         try {
             Thread.sleep(1);
             return DataBase.getInstance().tbPessoas;
