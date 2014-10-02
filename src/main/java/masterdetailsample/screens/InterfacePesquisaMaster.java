@@ -43,6 +43,7 @@ public class InterfacePesquisaMaster implements MasterEventListener {
         this.masterDetailSource = masterDetailSource;
         Grid grid = new Grid();
         this.masterDetailSource.addMasterListener(grid);
+
         table = grid.getTable();
 
         ToolBarInicialMaster ferramentasJanelaPesquisa = new ToolBarInicialMaster(masterDetailSource);

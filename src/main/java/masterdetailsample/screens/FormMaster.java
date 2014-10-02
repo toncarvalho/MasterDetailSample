@@ -68,7 +68,7 @@ public class FormMaster implements MasterEventListener {
 
         formMaster.getChildren().add(subFormulario.getScreen());
 
-        formMaster.setPrefSize(400, 400);
+        formMaster.setPrefSize(600, 550);
     }
 
     public VBox getScreen() {

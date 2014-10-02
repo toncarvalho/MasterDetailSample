@@ -1,7 +1,6 @@
 package masterdetailsample.screens;
 
 import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import masterdetailsample.components.BarraDeStatusDetalhe;
@@ -29,6 +28,7 @@ public class InterfaceCadastroDetail implements DetailEventListener {
 
     public InterfaceCadastroDetail(final MasterDetailEventSource masterDetailSource) {
         this.masterDetailSource = masterDetailSource;
+        this.masterDetailSource.addDetailListener(this);
 
         ToolBarFinalDetalhe toolBarFinalDetalhe = new ToolBarFinalDetalhe(masterDetailSource);
 
@@ -119,24 +119,12 @@ public class InterfaceCadastroDetail implements DetailEventListener {
     @Override
     public void selecaoDeItenDetalhe(final MasterDetailEvent event) {
 
-        System.out.println(this.getClass().getName() + " selecionando item");
-        if (event.getSource() != null && event.getSource() instanceof TableView) {
-            TableView<Contato> table = (TableView<Contato>) event.getSource();
-            if (table.getSelectionModel().getSelectedItem() != null) {
-                entidade = table.getSelectionModel().getSelectedItems().get(0);
-                edtNome.textProperty().setValue(entidade.getNome());
-                edtFone.textProperty().setValue(entidade.getFone());
-
-                edtNome.disableProperty().set(true);
-                edtFone.disableProperty().set(true);
-            }
-        } else if (event.getSource() != null && event.getSource() instanceof Contato) {
+        if (event.getSource() != null && event.getSource() instanceof Contato) {
             entidade = (Contato) event.getSource();
-            edtNome.textProperty().setValue(entidade.getNome());
-            edtFone.textProperty().setValue(entidade.getFone());
-
             edtNome.disableProperty().set(true);
             edtFone.disableProperty().set(true);
+            edtNome.textProperty().setValue(entidade.getNome());
+            edtFone.textProperty().setValue(entidade.getFone());
         } else {
             edtNome.disableProperty().set(true);
             edtFone.disableProperty().set(true);
