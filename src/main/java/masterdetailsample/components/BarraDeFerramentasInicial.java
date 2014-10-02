@@ -2,15 +2,16 @@ package masterdetailsample.components;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.ToolBar;
+import masterdetailsample.eventos.masterdetail.DetailEventListener;
 import masterdetailsample.eventos.masterdetail.MasterDetailEvent;
-import masterdetailsample.eventos.masterdetail.MasterDetailEventListener;
 import masterdetailsample.eventos.masterdetail.MasterDetailEventSource;
+import masterdetailsample.eventos.masterdetail.MasterEventListener;
 import masterdetailsample.types.FormState;
 
 /**
  * Created by ton on 9/26/14.
  */
-public class BarraDeFerramentasInicial implements MasterDetailEventListener {
+public class BarraDeFerramentasInicial implements MasterEventListener, DetailEventListener {
 
     private final MasterDetailEventSource masterDetailSource;
     private FormState formState;
@@ -149,6 +150,14 @@ public class BarraDeFerramentasInicial implements MasterDetailEventListener {
     @Override
     public void reiniciaPesquisa(final MasterDetailEvent event) {
 
+    }
+
+    @Override
+    public void selecaoDeItenDetalhe(final MasterDetailEvent event) {
+        this.formState = FormState.EXIBINDO_DETALHE_SELECIONADO;
+        this.novo.disableProperty().set(false);
+        this.alterar.disableProperty().set(false);
+        this.excluir.disableProperty().set(false);
     }
 
     public ToolBar createBarraInicializacao() {

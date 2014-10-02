@@ -4,9 +4,10 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 import javafx.application.Platform;
+import masterdetailsample.eventos.masterdetail.DetailEventListener;
 import masterdetailsample.eventos.masterdetail.MasterDetailEvent;
-import masterdetailsample.eventos.masterdetail.MasterDetailEventListener;
 import masterdetailsample.eventos.masterdetail.MasterDetailEventSource;
+import masterdetailsample.eventos.masterdetail.MasterEventListener;
 import masterdetailsample.model.DataBase;
 import masterdetailsample.model.Pessoa;
 import masterdetailsample.types.FormState;
@@ -14,7 +15,7 @@ import masterdetailsample.types.FormState;
 /**
  * Created by ton on 10/1/14.
  */
-public class BackEndService implements MasterDetailEventListener {
+public class BackEndService implements MasterEventListener, DetailEventListener {
 
     private static BackEndService service;
 
@@ -178,6 +179,11 @@ public class BackEndService implements MasterDetailEventListener {
 
     @Override
     public void reiniciaPesquisa(final MasterDetailEvent event) {
+
+    }
+
+    @Override
+    public void selecaoDeItenDetalhe(final MasterDetailEvent event) {
 
     }
 

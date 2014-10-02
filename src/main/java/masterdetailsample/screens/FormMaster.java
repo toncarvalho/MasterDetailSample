@@ -8,15 +8,15 @@ import javafx.scene.layout.VBox;
 import masterdetailsample.components.BarraDeFerramentasFinal;
 import masterdetailsample.components.BarraDeStatus;
 import masterdetailsample.eventos.masterdetail.MasterDetailEvent;
-import masterdetailsample.eventos.masterdetail.MasterDetailEventListener;
 import masterdetailsample.eventos.masterdetail.MasterDetailEventSource;
+import masterdetailsample.eventos.masterdetail.MasterEventListener;
 import masterdetailsample.model.Pessoa;
 import masterdetailsample.types.FormState;
 
 /**
  * Created by ton on 9/29/14.
  */
-public class FormMaster implements MasterDetailEventListener {
+public class FormMaster implements MasterEventListener {
 
     private FormState estadoInternoDoForm = FormState.INICIAL;
     private VBox formMaster = new VBox();
@@ -46,7 +46,7 @@ public class FormMaster implements MasterDetailEventListener {
             this.masterDetailSource.cancelamentoRegistro(entidade);
         });
 
-        this.masterDetailSource.addMasterDetailListener(ferramentasFormularioMaster);
+        this.masterDetailSource.addMasterListener(ferramentasFormularioMaster);
         formMaster.getChildren().add(new Label("FORMULÁRIO MASTER"));
 
         formMaster.getChildren().add(new VBox(lblNome, edtNome));
@@ -59,7 +59,7 @@ public class FormMaster implements MasterDetailEventListener {
 
         BarraDeStatus status = new BarraDeStatus();
         formMaster.getChildren().add(status);
-        this.masterDetailSource.addMasterDetailListener(status);
+        this.masterDetailSource.addMasterListener(status);
 
         ////////////////inserção do subormulario de detalhe
         SubFormulario subFormulario = new SubFormulario(masterDetailSource);
@@ -147,36 +147,6 @@ public class FormMaster implements MasterDetailEventListener {
         edtFone.setPromptText("telefone");
         edtEmail.textProperty().set("");
         edtEmail.setPromptText("email");
-    }
-
-    @Override
-    public void insercaoRegistroDetalhe(final MasterDetailEvent e) {
-
-    }
-
-    @Override
-    public void alteracaoRegistroDetalhe(final MasterDetailEvent e) {
-
-    }
-
-    @Override
-    public void exclusaoRegistroDetalhe(final MasterDetailEvent e) {
-
-    }
-
-    @Override
-    public void pesquisaRegistroDetalhe(final MasterDetailEvent e) {
-
-    }
-
-    @Override
-    public void gravacaoRegistroDetalhe(final MasterDetailEvent e) {
-
-    }
-
-    @Override
-    public void cancelamentoRegistroDetalhe(final MasterDetailEvent e) {
-
     }
 
     @Override

@@ -3,7 +3,7 @@ package masterdetailsample.eventos.masterdetail;
 /**
  * Created by ton on 9/26/14.
  */
-public class MasterDetailEventAdapter implements MasterDetailEventListener {
+public class MasterDetailEventAdapter implements MasterEventListener, DetailEventListener {
     @Override
     public void inicioCadastro(final MasterDetailEvent e) {
 
@@ -76,6 +76,11 @@ public class MasterDetailEventAdapter implements MasterDetailEventListener {
 
     @Override
     public void reiniciaPesquisa(final MasterDetailEvent event) {
+
+    }
+
+    @Override
+    public void selecaoDeItenDetalhe(final MasterDetailEvent event) {
 
     }
 }

@@ -6,13 +6,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import masterdetailsample.eventos.masterdetail.MasterDetailEvent;
-import masterdetailsample.eventos.masterdetail.MasterDetailEventListener;
+import masterdetailsample.eventos.masterdetail.MasterEventListener;
 import masterdetailsample.model.Pessoa;
 
 /**
  * Created by ton on 9/30/14.
  */
-public class Grid implements MasterDetailEventListener {
+public class Grid implements MasterEventListener {
 
     private TableView table;
 
@@ -23,7 +23,6 @@ public class Grid implements MasterDetailEventListener {
             public void run() {
 
                 table.itemsProperty().setValue(null);
-
             }
         });
     }
@@ -55,37 +54,6 @@ public class Grid implements MasterDetailEventListener {
 
     @Override
     public void pesquisaRegistro(final MasterDetailEvent e) {
-
-
-    }
-
-    @Override
-    public void insercaoRegistroDetalhe(final MasterDetailEvent e) {
-
-    }
-
-    @Override
-    public void alteracaoRegistroDetalhe(final MasterDetailEvent e) {
-
-    }
-
-    @Override
-    public void exclusaoRegistroDetalhe(final MasterDetailEvent e) {
-
-    }
-
-    @Override
-    public void pesquisaRegistroDetalhe(final MasterDetailEvent e) {
-
-    }
-
-    @Override
-    public void gravacaoRegistroDetalhe(final MasterDetailEvent e) {
-
-    }
-
-    @Override
-    public void cancelamentoRegistroDetalhe(final MasterDetailEvent e) {
 
     }
 

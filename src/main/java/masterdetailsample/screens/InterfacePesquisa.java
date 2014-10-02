@@ -13,8 +13,8 @@ import masterdetailsample.components.BarraDeFerramentasInicial;
 import masterdetailsample.components.BarraDeStatus;
 import masterdetailsample.components.Grid;
 import masterdetailsample.eventos.masterdetail.MasterDetailEvent;
-import masterdetailsample.eventos.masterdetail.MasterDetailEventListener;
 import masterdetailsample.eventos.masterdetail.MasterDetailEventSource;
+import masterdetailsample.eventos.masterdetail.MasterEventListener;
 import masterdetailsample.model.Pessoa;
 import masterdetailsample.services.BackEndService;
 import masterdetailsample.types.FormState;
@@ -22,7 +22,7 @@ import masterdetailsample.types.FormState;
 /**
  * Created by ton on 9/29/14.
  */
-public class InterfacePesquisa implements MasterDetailEventListener {
+public class InterfacePesquisa implements MasterEventListener {
 
     private final TableView<Pessoa> table;
 
@@ -42,7 +42,7 @@ public class InterfacePesquisa implements MasterDetailEventListener {
         this.estado = FormState.INICIAL;
         this.masterDetailSource = masterDetailSource;
         Grid grid = new Grid();
-        this.masterDetailSource.addMasterDetailListener(grid);
+        this.masterDetailSource.addMasterListener(grid);
         table = grid.getTable();
 
         BarraDeFerramentasInicial ferramentasJanelaPesquisa = new BarraDeFerramentasInicial(masterDetailSource);
@@ -64,7 +64,7 @@ public class InterfacePesquisa implements MasterDetailEventListener {
             masterDetailSource.exclusaoRegistro(ferramentasJanelaPesquisa);
         });
 
-        this.masterDetailSource.addMasterDetailListener(ferramentasJanelaPesquisa);
+        this.masterDetailSource.addMasterListener(ferramentasJanelaPesquisa);
         VBox interfacePesquisa = new VBox();
         interfacePesquisa.getChildren().add(new Label("Pesquisa"));
         interfacePesquisa.getChildren().add(new ToolBar(btnPesquisa, btnLimpaGrid, btnReinicia));
@@ -73,7 +73,6 @@ public class InterfacePesquisa implements MasterDetailEventListener {
         table.getSelectionModel().getSelectedItems().addListener(new ListChangeListener() {
             @Override
             public void onChanged(final Change c) {
-
 
                 masterDetailSource.selecaoDeIten(table);
             }
@@ -84,8 +83,8 @@ public class InterfacePesquisa implements MasterDetailEventListener {
 
         BarraDeStatus status = new BarraDeStatus();
         interfacePesquisa.getChildren().add(status);
-        this.masterDetailSource.addMasterDetailListener(status);
-        interfacePesquisa.setPrefSize(400, 250);
+        this.masterDetailSource.addMasterListener(status);
+        interfacePesquisa.setPrefSize(350, 200);
         vBox.getChildren().add(interfacePesquisa);
 
         btnPesquisa.setOnAction(event -> {
@@ -157,36 +156,6 @@ public class InterfacePesquisa implements MasterDetailEventListener {
                 pessoaObservableList.addAll(FXCollections.observableList(BackEndService.getInstance().getPessoas()));
             }
         });
-    }
-
-    @Override
-    public void insercaoRegistroDetalhe(final MasterDetailEvent e) {
-
-    }
-
-    @Override
-    public void alteracaoRegistroDetalhe(final MasterDetailEvent e) {
-
-    }
-
-    @Override
-    public void exclusaoRegistroDetalhe(final MasterDetailEvent e) {
-
-    }
-
-    @Override
-    public void pesquisaRegistroDetalhe(final MasterDetailEvent e) {
-
-    }
-
-    @Override
-    public void gravacaoRegistroDetalhe(final MasterDetailEvent e) {
-
-    }
-
-    @Override
-    public void cancelamentoRegistroDetalhe(final MasterDetailEvent e) {
-
     }
 
     @Override

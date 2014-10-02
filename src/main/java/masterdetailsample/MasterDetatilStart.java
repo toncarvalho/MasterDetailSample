@@ -33,14 +33,14 @@ public class MasterDetatilStart extends Application {
 
         BackEndService service = BackEndService.getInstance();
         service.setEventSource(masterDetailSource);
-        masterDetailSource.addMasterDetailListener(service);
+        masterDetailSource.addMasterListener(service);
 
         InterfacePesquisa interfacePesquisa = new InterfacePesquisa(masterDetailSource);
         vBox.getChildren().add(interfacePesquisa.getScreen());
-        masterDetailSource.addMasterDetailListener(interfacePesquisa);
+        masterDetailSource.addMasterListener(interfacePesquisa);
 
         FormMaster formMaster = new FormMaster(masterDetailSource);
-        masterDetailSource.addMasterDetailListener(formMaster);
+        masterDetailSource.addMasterListener(formMaster);
 
         Separator separator = new Separator();
         separator.setPrefSize(20, 20);
