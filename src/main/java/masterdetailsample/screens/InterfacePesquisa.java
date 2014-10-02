@@ -74,6 +74,7 @@ public class InterfacePesquisa implements MasterDetailEventListener {
             @Override
             public void onChanged(final Change c) {
 
+
                 masterDetailSource.selecaoDeIten(table);
             }
         });

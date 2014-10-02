@@ -57,6 +57,7 @@ public class FormMaster implements MasterDetailEventListener {
 
         formMaster.getChildren().add(ferramentasFormularioMaster.createBarraFinalizacao());
 
+        BarraDeStatus status = new BarraDeStatus();
         formMaster.getChildren().add(status);
         this.masterDetailSource.addMasterDetailListener(status);
 
