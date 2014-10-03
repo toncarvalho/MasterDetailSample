@@ -43,6 +43,7 @@ public class BarraDeStatusDetalhe extends HBox implements DetailEventListener {
 
     @Override
     public void gravacaoRegistroDetalhe(final MasterDetailEvent e) {
+
         this.label.textProperty().setValue(" Status: " + FormState.PROCESSANDO_DETALHE.name());
     }
 

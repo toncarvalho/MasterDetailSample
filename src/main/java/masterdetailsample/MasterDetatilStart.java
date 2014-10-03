@@ -8,7 +8,6 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import masterdetailsample.eventos.masterdetail.MasterDetailEventSource;
-import masterdetailsample.model.DataBase;
 import masterdetailsample.screens.FormMaster;
 import masterdetailsample.screens.InterfacePesquisaMaster;
 import masterdetailsample.services.BackEndService;
@@ -17,8 +16,6 @@ import masterdetailsample.services.BackEndService;
  * Created by ton on 9/26/14.
  */
 public class MasterDetatilStart extends Application {
-
-    private DataBase base = DataBase.getInstance();
 
     @Override
     public void start(final Stage primaryStage) throws Exception {
@@ -34,6 +31,7 @@ public class MasterDetatilStart extends Application {
         BackEndService service = BackEndService.getInstance();
         service.setEventSource(masterDetailSource);
         masterDetailSource.addMasterListener(service);
+        masterDetailSource.addDetailListener(service);
 
         InterfacePesquisaMaster interfacePesquisa = new InterfacePesquisaMaster(masterDetailSource);
         vBox.getChildren().add(interfacePesquisa.getScreen());

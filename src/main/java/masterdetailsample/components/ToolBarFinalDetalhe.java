@@ -63,6 +63,8 @@ public class ToolBarFinalDetalhe implements DetailEventListener {
         this.formState = FormState.PROCESSANDO;
         this.salvar.disableProperty().setValue(true);
         this.cancelar.disableProperty().setValue(true);
+
+
     }
 
     @Override

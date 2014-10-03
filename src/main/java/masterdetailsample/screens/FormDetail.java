@@ -92,7 +92,6 @@ public class FormDetail implements MasterEventListener, DetailEventListener {
         InterfaceCadastroDetail cadastroDetail = new InterfaceCadastroDetail(masterDetailSource);
         vBox.getChildren().add(new Separator());
         vBox.getChildren().add(cadastroDetail.getScreen());
-
     }
 
     public VBox getScreen() {
@@ -235,6 +234,8 @@ public class FormDetail implements MasterEventListener, DetailEventListener {
     public void selecaoDeItenDetalhe(final MasterDetailEvent event) {
         System.out.println(" ouvinte do evento selecaoDeItenDetalhe em:" + this.getClass().getName());
         System.out.println(" detalhe selecionado: " + event.getSource());
+        entidadeDetalhe = (Contato) event.getSource();
+
     }
 
     /**

@@ -32,12 +32,6 @@ public class InterfaceCadastroDetail implements DetailEventListener {
 
         ToolBarFinalDetalhe toolBarFinalDetalhe = new ToolBarFinalDetalhe(masterDetailSource);
 
-        toolBarFinalDetalhe.salvar.setOnAction(event -> {
-            entidade.setNome(edtNome.textProperty().getValue());
-            entidade.setFone(edtFone.textProperty().getValue());
-            //implementar gravacao registro detalhe
-            this.masterDetailSource.gravacaoRegistro(entidade);
-        });
         toolBarFinalDetalhe.cancelar.setOnAction(event -> {
             this.masterDetailSource.cancelamentoRegistro(entidade);
         });
@@ -56,6 +50,16 @@ public class InterfaceCadastroDetail implements DetailEventListener {
         this.masterDetailSource.addDetailListener(status);
 
         boxSubformularioCadastro.setPrefSize(400, 200);
+
+        toolBarFinalDetalhe.salvar.setOnAction(event -> {
+            if (entidade != null) {
+                entidade.setNome(edtNome.textProperty().getValue());
+                entidade.setFone(edtFone.textProperty().getValue());
+                this.masterDetailSource.gravacaoRegistroDetalhe(entidade);
+            } else {
+                System.out.println(" Não há contato selecionado, selecione um contato e repita a operação!!!");
+            }
+        });
     }
 
     public VBox getScreen() {

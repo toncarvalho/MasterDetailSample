@@ -8,6 +8,7 @@ import masterdetailsample.eventos.masterdetail.DetailEventListener;
 import masterdetailsample.eventos.masterdetail.MasterDetailEvent;
 import masterdetailsample.eventos.masterdetail.MasterDetailEventSource;
 import masterdetailsample.eventos.masterdetail.MasterEventListener;
+import masterdetailsample.model.Contato;
 import masterdetailsample.model.DataBase;
 import masterdetailsample.model.Pessoa;
 import masterdetailsample.types.FormState;
@@ -164,7 +165,54 @@ public class BackEndService implements MasterEventListener, DetailEventListener 
 
     @Override
     public void gravacaoRegistroDetalhe(final MasterDetailEvent e) {
+        System.out.println("ouviu o evento gravacaoRegistroDetalhe em: " + this.getClass().getName());
 
+        System.out.println(" gravou!!!");
+
+
+    /*    Pessoa novo = (Pessoa) e.getSource();
+        if (novo.getId() == null) {
+            novo.setId(DataBase.getInstance().tbPessoas.stream().count() + 1);
+            DataBase.getInstance().tbPessoas.sort(Comparator.comparingLong(obj -> obj.getId()));
+
+            Long novoId = (DataBase.getInstance().tbPessoas.get(DataBase.getInstance().tbPessoas.size() - 1).getId() + 1);
+            novo.setId(novoId);
+            DataBase.getInstance().tbPessoas.add(novo);
+            eventSource.pesquisaRegistro();
+        } else {
+            List<Pessoa> pessoas = DataBase.getInstance().tbPessoas;
+            Pessoa antigo = pessoas.stream().filter(Predicate.isEqual(novo)).findFirst().get();
+            antigo.setId(novo.getId());
+            antigo.setNome(novo.getNome());
+            antigo.setFone(novo.getFone());
+            antigo.setEmail(novo.getEmail());
+            eventSource.pesquisaRegistro();
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    eventSource.selecaoDeIten(antigo);
+                }
+            });
+        }
+
+        System.out.println(" Lista completa de registros ");
+
+        DataBase.getInstance().tbPessoas.forEach(pessoa -> {
+            System.out.println(pessoa);
+        });
+
+        estadoInterno = FormState.INICIAL;*/
+
+        Contato contato = (Contato) e.getSource();
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                eventSource.selecaoDeItenDetalhe(contato);
+
+                System.out.println(" disparou o evento selecaoDeItenDetalhe em: " + this.getClass().getName());
+            }
+        });
     }
 
     @Override

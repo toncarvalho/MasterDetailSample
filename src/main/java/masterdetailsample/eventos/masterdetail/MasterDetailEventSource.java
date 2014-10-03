@@ -158,6 +158,27 @@ public class MasterDetailEventSource {
         }
     }
 
+    public void inicioCadastroDetalhe() {
+        MasterDetailEvent event = new MasterDetailEvent(this);
+        for (DetailEventListener listener : cloneDetailListeners()) {
+            listener.inicioCadastroDetalhe(event);
+        }
+    }
+
+    public void gravacaoRegistroDetalhe() {
+        MasterDetailEvent event = new MasterDetailEvent(this);
+        for (DetailEventListener listener : cloneDetailListeners()) {
+            listener.gravacaoRegistroDetalhe(event);
+        }
+    }
+
+    public void gravacaoRegistroDetalhe(final Object source) {
+        MasterDetailEvent event = new MasterDetailEvent(source);
+        for (DetailEventListener listener : cloneDetailListeners()) {
+            listener.gravacaoRegistroDetalhe(event);
+        }
+    }
+
     public void selecaoDeIten(final Object source) {
         MasterDetailEvent event = new MasterDetailEvent(source);
         for (MasterEventListener listener : cloneMasterListeners()) {
@@ -234,13 +255,4 @@ public class MasterDetailEventSource {
             return (Collection) (((ArrayList) detailEventListeners).clone());
         }
     }
-
-    public void inicioCadastroDetalhe() {
-        MasterDetailEvent event = new MasterDetailEvent(this);
-        for (DetailEventListener listener : cloneDetailListeners()) {
-            listener.inicioCadastroDetalhe(event);
-        }
-    }
-
-
 }
