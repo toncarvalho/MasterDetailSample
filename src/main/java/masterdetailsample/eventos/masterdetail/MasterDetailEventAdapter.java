@@ -5,87 +5,97 @@ package masterdetailsample.eventos.masterdetail;
  */
 public class MasterDetailEventAdapter implements MasterEventListener, DetailEventListener {
     @Override
-    public void inicioCadastro(final MasterDetailEvent e) {
+    public void startFormListener(final MasterDetailEvent e) {
 
     }
 
     @Override
-    public void gravacaoRegistro(final MasterDetailEvent e) {
+    public void persistListener(final MasterDetailEvent e) {
 
     }
 
     @Override
-    public void cancelamentoRegistro(final MasterDetailEvent e) {
+    public void cancelListener(final MasterDetailEvent e) {
 
     }
 
     @Override
-    public void insercaoRegistro(final MasterDetailEvent e) {
+    public void insertListener(final MasterDetailEvent e) {
 
     }
 
     @Override
-    public void alteracaoRegistro(final MasterDetailEvent e) {
+    public void changeItemListener(final MasterDetailEvent e) {
 
     }
 
     @Override
-    public void exclusaoRegistro(final MasterDetailEvent e) {
+    public void deleteListener(final MasterDetailEvent e) {
 
     }
 
     @Override
-    public void pesquisaRegistro(final MasterDetailEvent e) {
+    public void searchListener(final MasterDetailEvent e) {
 
     }
 
     @Override
-    public void insercaoRegistroDetalhe(final MasterDetailEvent e) {
+    public void selectDetailListener(final MasterDetailEvent event) {
 
     }
 
     @Override
-    public void alteracaoRegistroDetalhe(final MasterDetailEvent e) {
+    public void restartSearchInDetails(final MasterDetailEvent event) {
 
     }
 
     @Override
-    public void exclusaoRegistroDetalhe(final MasterDetailEvent e) {
+    public void insertDetailListener(final MasterDetailEvent e) {
 
     }
 
     @Override
-    public void pesquisaRegistroDetalhe(final MasterDetailEvent e) {
+    public void changeDetailListener(final MasterDetailEvent e) {
 
     }
 
     @Override
-    public void gravacaoRegistroDetalhe(final MasterDetailEvent e) {
+    public void deleteDetailListener(final MasterDetailEvent e) {
 
     }
 
     @Override
-    public void cancelamentoRegistroDetalhe(final MasterDetailEvent e) {
+    public void searchDetailListener(final MasterDetailEvent e) {
 
     }
 
     @Override
-    public void selecaoDeIten(final MasterDetailEvent event) {
+    public void persistDetailListener(final MasterDetailEvent e) {
 
     }
 
     @Override
-    public void reiniciaPesquisa(final MasterDetailEvent event) {
+    public void cancelDetailListener(final MasterDetailEvent e) {
 
     }
 
     @Override
-    public void selecaoDeItenDetalhe(final MasterDetailEvent event) {
+    public void selectListener(final MasterDetailEvent event) {
 
     }
 
     @Override
-    public void inicioCadastroDetalhe(final MasterDetailEvent event) {
+    public void restartSearchListener(final MasterDetailEvent event) {
+
+    }
+
+    @Override
+    public void selectMasterItemListener(final MasterDetailEvent event) {
+
+    }
+
+    @Override
+    public void startNewDetailListener(final MasterDetailEvent event) {
 
     }
 }

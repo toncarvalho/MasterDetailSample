@@ -38,7 +38,7 @@ public class BackEndService implements MasterEventListener, DetailEventListener 
     }
 
     @Override
-    public void inicioCadastro(final MasterDetailEvent event) {
+    public void startFormListener(final MasterDetailEvent event) {
         try {
             Thread.sleep(1000);
             estadoInterno = FormState.INICIAL;
@@ -48,7 +48,7 @@ public class BackEndService implements MasterEventListener, DetailEventListener 
     }
 
     @Override
-    public void gravacaoRegistro(final MasterDetailEvent e) {
+    public void persistListener(final MasterDetailEvent e) {
 
         Pessoa novo = (Pessoa) e.getSource();
         if (novo.getId() == null) {
@@ -85,7 +85,7 @@ public class BackEndService implements MasterEventListener, DetailEventListener 
     }
 
     @Override
-    public void cancelamentoRegistro(final MasterDetailEvent e) {
+    public void cancelListener(final MasterDetailEvent e) {
         try {
             Thread.sleep(500);
             System.out.println(this.getClass().getName() + " Efetuando Cancelamento!!!");
@@ -102,14 +102,14 @@ public class BackEndService implements MasterEventListener, DetailEventListener 
     }
 
     @Override
-    public void insercaoRegistro(final MasterDetailEvent e) {
+    public void insertListener(final MasterDetailEvent e) {
 
         System.out.println(this.getClass().getName()
                            + "Inicicizando inserção de novo registro, carregando caixas  de seleção e valores default de componentes!!!");
     }
 
     @Override
-    public void alteracaoRegistro(final MasterDetailEvent e) {
+    public void changeItemListener(final MasterDetailEvent e) {
         try {
             Thread.sleep(1);
             estadoInterno = FormState.EDITANDO;
@@ -120,7 +120,7 @@ public class BackEndService implements MasterEventListener, DetailEventListener 
     }
 
     @Override
-    public void exclusaoRegistro(final MasterDetailEvent e) {
+    public void deleteListener(final MasterDetailEvent e) {
         try {
             Thread.sleep(1000);
             Pessoa objeto = (Pessoa) e.getSource();
@@ -134,7 +134,7 @@ public class BackEndService implements MasterEventListener, DetailEventListener 
     }
 
     @Override
-    public void pesquisaRegistro(final MasterDetailEvent e) {
+    public void searchListener(final MasterDetailEvent e) {
 
         try {
             Thread.sleep(500);
@@ -146,28 +146,38 @@ public class BackEndService implements MasterEventListener, DetailEventListener 
     }
 
     @Override
-    public void insercaoRegistroDetalhe(final MasterDetailEvent e) {
+    public void selectDetailListener(final MasterDetailEvent event) {
 
     }
 
     @Override
-    public void alteracaoRegistroDetalhe(final MasterDetailEvent e) {
+    public void restartSearchInDetails(final MasterDetailEvent event) {
 
     }
 
     @Override
-    public void exclusaoRegistroDetalhe(final MasterDetailEvent e) {
+    public void insertDetailListener(final MasterDetailEvent e) {
 
     }
 
     @Override
-    public void pesquisaRegistroDetalhe(final MasterDetailEvent e) {
+    public void changeDetailListener(final MasterDetailEvent e) {
 
     }
 
     @Override
-    public void gravacaoRegistroDetalhe(final MasterDetailEvent e) {
-        System.out.println("ouviu o evento gravacaoRegistroDetalhe em: " + this.getClass().getName());
+    public void deleteDetailListener(final MasterDetailEvent e) {
+
+    }
+
+    @Override
+    public void searchDetailListener(final MasterDetailEvent e) {
+
+    }
+
+    @Override
+    public void persistDetailListener(final MasterDetailEvent e) {
+        System.out.println("ouviu o evento persistDetailListener em: " + this.getClass().getName());
 
         Map<String, Serializable> map = (Map<String, Serializable>) e.getSource();
         Pessoa pessoa = (Pessoa) map.get("pessoa");
@@ -200,33 +210,33 @@ public class BackEndService implements MasterEventListener, DetailEventListener 
             public void run() {
                 eventSource.selecaoDeItenDetalhe(contato);
 
-                System.out.println(" disparou o evento selecaoDeItenDetalhe em: " + this.getClass().getName());
+                System.out.println(" disparou o evento selectMasterItemListener em: " + this.getClass().getName());
             }
         });
     }
 
     @Override
-    public void cancelamentoRegistroDetalhe(final MasterDetailEvent e) {
+    public void cancelDetailListener(final MasterDetailEvent e) {
 
     }
 
     @Override
-    public void selecaoDeIten(final MasterDetailEvent event) {
+    public void selectListener(final MasterDetailEvent event) {
 
     }
 
     @Override
-    public void reiniciaPesquisa(final MasterDetailEvent event) {
+    public void restartSearchListener(final MasterDetailEvent event) {
 
     }
 
     @Override
-    public void selecaoDeItenDetalhe(final MasterDetailEvent event) {
+    public void selectMasterItemListener(final MasterDetailEvent event) {
 
     }
 
     @Override
-    public void inicioCadastroDetalhe(final MasterDetailEvent event) {
+    public void startNewDetailListener(final MasterDetailEvent event) {
 
     }
 

@@ -10,7 +10,7 @@ import masterdetailsample.types.FormState;
 /**
  * Created by ton on 9/26/14.
  */
-public class ToolBarInicialDetalhe implements DetailEventListener {
+public class StartDetailEventsToolBar implements DetailEventListener {
 
     private final MasterDetailEventSource masterDetailSource;
     private FormState formState;
@@ -21,7 +21,7 @@ public class ToolBarInicialDetalhe implements DetailEventListener {
 
     private ToolBar barra;
 
-    public ToolBarInicialDetalhe(final MasterDetailEventSource masterDetailSource) {
+    public StartDetailEventsToolBar(final MasterDetailEventSource masterDetailSource) {
         this.masterDetailSource = masterDetailSource;
     }
 
@@ -34,7 +34,7 @@ public class ToolBarInicialDetalhe implements DetailEventListener {
     }
 
     @Override
-    public void insercaoRegistroDetalhe(final MasterDetailEvent e) {
+    public void insertDetailListener(final MasterDetailEvent e) {
         this.formState = FormState.INSERINDO_DETALHE;
         this.novo.disableProperty().set(true);
         this.alterar.disableProperty().set(true);
@@ -42,7 +42,7 @@ public class ToolBarInicialDetalhe implements DetailEventListener {
     }
 
     @Override
-    public void alteracaoRegistroDetalhe(final MasterDetailEvent e) {
+    public void changeDetailListener(final MasterDetailEvent e) {
         this.formState = FormState.EDITANDO_DETALHE;
         this.novo.disableProperty().set(true);
         this.alterar.disableProperty().set(true);
@@ -50,7 +50,7 @@ public class ToolBarInicialDetalhe implements DetailEventListener {
     }
 
     @Override
-    public void exclusaoRegistroDetalhe(final MasterDetailEvent e) {
+    public void deleteDetailListener(final MasterDetailEvent e) {
         this.formState = FormState.EXCLUINDO_DETALHE;
         this.novo.disableProperty().set(true);
         this.alterar.disableProperty().set(true);
@@ -58,7 +58,7 @@ public class ToolBarInicialDetalhe implements DetailEventListener {
     }
 
     @Override
-    public void pesquisaRegistroDetalhe(final MasterDetailEvent e) {
+    public void searchDetailListener(final MasterDetailEvent e) {
         this.formState = FormState.PESQUISANDO_ITENS_DETALHE;
         this.novo.disableProperty().set(true);
         this.alterar.disableProperty().set(true);
@@ -66,7 +66,7 @@ public class ToolBarInicialDetalhe implements DetailEventListener {
     }
 
     @Override
-    public void gravacaoRegistroDetalhe(final MasterDetailEvent e) {
+    public void persistDetailListener(final MasterDetailEvent e) {
         this.formState = FormState.PROCESSANDO;
         this.novo.disableProperty().set(true);
         this.alterar.disableProperty().set(true);
@@ -74,7 +74,7 @@ public class ToolBarInicialDetalhe implements DetailEventListener {
     }
 
     @Override
-    public void cancelamentoRegistroDetalhe(final MasterDetailEvent e) {
+    public void cancelDetailListener(final MasterDetailEvent e) {
         this.formState = FormState.PROCESSANDO;
         this.novo.disableProperty().set(true);
         this.alterar.disableProperty().set(true);
@@ -82,7 +82,7 @@ public class ToolBarInicialDetalhe implements DetailEventListener {
     }
 
     @Override
-    public void selecaoDeIten(final MasterDetailEvent event) {
+    public void selectDetailListener(final MasterDetailEvent event) {
         this.formState = FormState.EXIBINDO_REGISTRO_SELECIONADO;
         this.novo.disableProperty().set(false);
         this.alterar.disableProperty().set(false);
@@ -90,7 +90,7 @@ public class ToolBarInicialDetalhe implements DetailEventListener {
     }
 
     @Override
-    public void reiniciaPesquisa(final MasterDetailEvent event) {
+    public void restartSearchInDetails(final MasterDetailEvent event) {
         this.formState = FormState.DETALHE_SELECIONADO;
         this.novo.disableProperty().set(true);
         this.alterar.disableProperty().set(true);
@@ -98,7 +98,7 @@ public class ToolBarInicialDetalhe implements DetailEventListener {
     }
 
     @Override
-    public void selecaoDeItenDetalhe(final MasterDetailEvent event) {
+    public void selectMasterItemListener(final MasterDetailEvent event) {
         this.formState = FormState.DETALHE_SELECIONADO;
         //depois sincronizar com o alterar do master, pois só deve ser possível trabalhar em um item do detalhe quando o master estiver em edição.
         this.novo.disableProperty().set(false);
@@ -107,9 +107,9 @@ public class ToolBarInicialDetalhe implements DetailEventListener {
     }
 
     @Override
-    public void inicioCadastroDetalhe(final MasterDetailEvent event) {
+    public void startNewDetailListener(final MasterDetailEvent event) {
         this.formState = FormState.INICIO_CADASTRO_DETALHE;
-        this.novo.disableProperty().set(true);
+        this.novo.disableProperty().set(false);
         this.alterar.disableProperty().set(true);
         this.excluir.disableProperty().set(true);
     }

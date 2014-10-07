@@ -5,8 +5,8 @@ import javafx.scene.control.Separator;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import masterdetailsample.components.BarraDeStatusMaster;
-import masterdetailsample.components.ToolBarFinalMaster;
+import masterdetailsample.components.MasterStatusBar;
+import masterdetailsample.components.ConfirmMasterEventsToolBar;
 import masterdetailsample.eventos.masterdetail.MasterDetailEvent;
 import masterdetailsample.eventos.masterdetail.MasterDetailEventSource;
 import masterdetailsample.eventos.masterdetail.MasterEventListener;
@@ -27,14 +27,14 @@ public class FormMaster implements MasterEventListener {
     private TextField edtFone = new TextField();
     private Label lblEmail = new Label("Email:");
     private TextField edtEmail = new TextField();
-    private BarraDeStatusMaster status = new BarraDeStatusMaster();
+    private MasterStatusBar status = new MasterStatusBar();
 
     private Pessoa entidade;
 
     public FormMaster(final MasterDetailEventSource masterDetailSource) {
         this.masterDetailSource = masterDetailSource;
 
-        ToolBarFinalMaster ferramentasFormularioMaster = new ToolBarFinalMaster(masterDetailSource);
+        ConfirmMasterEventsToolBar ferramentasFormularioMaster = new ConfirmMasterEventsToolBar(masterDetailSource);
 
         ferramentasFormularioMaster.salvar.setOnAction(event -> {
             entidade.setNome(edtNome.textProperty().getValue());
@@ -57,7 +57,7 @@ public class FormMaster implements MasterEventListener {
 
         formMaster.getChildren().add(ferramentasFormularioMaster.createBarraFinalizacao());
 
-        BarraDeStatusMaster status = new BarraDeStatusMaster();
+        MasterStatusBar status = new MasterStatusBar();
         formMaster.getChildren().add(status);
         this.masterDetailSource.addMasterListener(status);
 
@@ -77,7 +77,7 @@ public class FormMaster implements MasterEventListener {
     }
 
     @Override
-    public void inicioCadastro(final MasterDetailEvent e) {
+    public void startFormListener(final MasterDetailEvent e) {
         edtNome.disableProperty().set(true);
         edtFone.disableProperty().set(true);
         edtEmail.disableProperty().set(true);
@@ -90,12 +90,12 @@ public class FormMaster implements MasterEventListener {
     }
 
     @Override
-    public void gravacaoRegistro(final MasterDetailEvent e) {
+    public void persistListener(final MasterDetailEvent e) {
 
     }
 
     @Override
-    public void cancelamentoRegistro(final MasterDetailEvent e) {
+    public void cancelListener(final MasterDetailEvent e) {
 
         switch (this.estadoInternoDoForm) {
         case EDITANDO: {
@@ -114,7 +114,7 @@ public class FormMaster implements MasterEventListener {
     }
 
     @Override
-    public void insercaoRegistro(final MasterDetailEvent e) {
+    public void insertListener(final MasterDetailEvent e) {
         this.estadoInternoDoForm = FormState.INSERINDO;
         entidade = new Pessoa();
         edtNome.disableProperty().set(false);
@@ -129,19 +129,19 @@ public class FormMaster implements MasterEventListener {
     }
 
     @Override
-    public void alteracaoRegistro(final MasterDetailEvent e) {
+    public void changeItemListener(final MasterDetailEvent e) {
         edtNome.disableProperty().set(false);
         edtFone.disableProperty().set(false);
         edtEmail.disableProperty().set(false);
     }
 
     @Override
-    public void exclusaoRegistro(final MasterDetailEvent e) {
+    public void deleteListener(final MasterDetailEvent e) {
 
     }
 
     @Override
-    public void pesquisaRegistro(final MasterDetailEvent e) {
+    public void searchListener(final MasterDetailEvent e) {
         edtNome.textProperty().set("");
         edtNome.setPromptText("nome");
         edtFone.textProperty().set("");
@@ -151,7 +151,7 @@ public class FormMaster implements MasterEventListener {
     }
 
     @Override
-    public void selecaoDeIten(final MasterDetailEvent event) {
+    public void selectListener(final MasterDetailEvent event) {
         System.out.println(this.getClass().getName() + " selecionando item");
         if (event.getSource() != null && event.getSource() instanceof TableView) {
             TableView<Pessoa> table = (TableView<Pessoa>) event.getSource();
@@ -182,7 +182,7 @@ public class FormMaster implements MasterEventListener {
     }
 
     @Override
-    public void reiniciaPesquisa(final MasterDetailEvent event) {
+    public void restartSearchListener(final MasterDetailEvent event) {
 
     }
 

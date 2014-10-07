@@ -3,7 +3,8 @@ package masterdetailsample.eventos.masterdetail;
 import java.util.EventObject;
 
 /**
- * Created by ton on 9/26/14.
+ * Classe implementada com o objetivo de servir de base de eventos para um formulário com sub-formularios ou formulários mestre detalhe
+ *
  */
 public class MasterDetailEvent extends EventObject {
     /**

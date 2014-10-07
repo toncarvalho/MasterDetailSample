@@ -10,7 +10,7 @@ import masterdetailsample.types.FormState;
 /**
  * Created by ton on 9/26/14.
  */
-public class ToolBarInicialMaster implements MasterEventListener {
+public class StartMasterEventsToolBar implements MasterEventListener {
 
     private final MasterDetailEventSource masterDetailSource;
     private FormState formState;
@@ -21,7 +21,7 @@ public class ToolBarInicialMaster implements MasterEventListener {
 
     private ToolBar barra;
 
-    public ToolBarInicialMaster(final MasterDetailEventSource masterDetailSource) {
+    public StartMasterEventsToolBar(final MasterDetailEventSource masterDetailSource) {
         this.masterDetailSource = masterDetailSource;
     }
 
@@ -34,7 +34,7 @@ public class ToolBarInicialMaster implements MasterEventListener {
     }
 
     @Override
-    public void inicioCadastro(final MasterDetailEvent e) {
+    public void startFormListener(final MasterDetailEvent e) {
 
         this.formState = FormState.INICIAL;
         this.novo.disableProperty().set(false);
@@ -43,7 +43,7 @@ public class ToolBarInicialMaster implements MasterEventListener {
     }
 
     @Override
-    public void gravacaoRegistro(final MasterDetailEvent e) {
+    public void persistListener(final MasterDetailEvent e) {
         this.formState = FormState.PROCESSANDO;
         this.novo.disableProperty().setValue(false);
         this.alterar.disableProperty().setValue(false);
@@ -51,7 +51,7 @@ public class ToolBarInicialMaster implements MasterEventListener {
     }
 
     @Override
-    public void cancelamentoRegistro(final MasterDetailEvent e) {
+    public void cancelListener(final MasterDetailEvent e) {
         this.formState = FormState.PROCESSANDO;
         this.novo.disableProperty().setValue(false);
         this.alterar.disableProperty().setValue(false);
@@ -59,7 +59,7 @@ public class ToolBarInicialMaster implements MasterEventListener {
     }
 
     @Override
-    public void insercaoRegistro(final MasterDetailEvent e) {
+    public void insertListener(final MasterDetailEvent e) {
         this.formState = FormState.INSERINDO;
         this.novo.disableProperty().set(true);
         this.alterar.disableProperty().set(true);
@@ -67,7 +67,7 @@ public class ToolBarInicialMaster implements MasterEventListener {
     }
 
     @Override
-    public void alteracaoRegistro(final MasterDetailEvent e) {
+    public void changeItemListener(final MasterDetailEvent e) {
         this.formState = FormState.EDITANDO;
         this.novo.disableProperty().set(true);
         this.alterar.disableProperty().set(true);
@@ -75,7 +75,7 @@ public class ToolBarInicialMaster implements MasterEventListener {
     }
 
     @Override
-    public void exclusaoRegistro(final MasterDetailEvent e) {
+    public void deleteListener(final MasterDetailEvent e) {
         this.formState = FormState.EXCLUINDO;
         this.novo.disableProperty().set(true);
         this.alterar.disableProperty().set(true);
@@ -83,7 +83,7 @@ public class ToolBarInicialMaster implements MasterEventListener {
     }
 
     @Override
-    public void pesquisaRegistro(final MasterDetailEvent e) {
+    public void searchListener(final MasterDetailEvent e) {
         this.formState = FormState.PESQUISANDO;
         this.novo.disableProperty().set(false);
         this.alterar.disableProperty().set(true);
@@ -91,7 +91,7 @@ public class ToolBarInicialMaster implements MasterEventListener {
     }
 
     @Override
-    public void selecaoDeIten(final MasterDetailEvent event) {
+    public void selectListener(final MasterDetailEvent event) {
         this.formState = FormState.EXIBINDO_REGISTRO_SELECIONADO;
         this.novo.disableProperty().set(false);
         this.alterar.disableProperty().set(false);
@@ -99,7 +99,7 @@ public class ToolBarInicialMaster implements MasterEventListener {
     }
 
     @Override
-    public void reiniciaPesquisa(final MasterDetailEvent event) {
+    public void restartSearchListener(final MasterDetailEvent event) {
 
     }
 

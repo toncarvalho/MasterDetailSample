@@ -9,9 +9,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
-import masterdetailsample.components.BarraDeStatusDetalhe;
+import masterdetailsample.components.DetailStatusBar;
 import masterdetailsample.components.GridSubFormulario;
-import masterdetailsample.components.ToolBarInicialDetalhe;
+import masterdetailsample.components.StartDetailEventsToolBar;
 import masterdetailsample.eventos.masterdetail.DetailEventListener;
 import masterdetailsample.eventos.masterdetail.MasterDetailEvent;
 import masterdetailsample.eventos.masterdetail.MasterDetailEventSource;
@@ -47,7 +47,7 @@ public class FormDetail implements MasterEventListener, DetailEventListener {
         this.masterDetailSource.addMasterListener(this);
         this.masterDetailSource.addDetailListener(this);
 
-        ToolBarInicialDetalhe ferramentasInicialDetalhe = new ToolBarInicialDetalhe(masterDetailSource);
+        StartDetailEventsToolBar ferramentasInicialDetalhe = new StartDetailEventsToolBar(masterDetailSource);
         ferramentasInicialDetalhe.novo.setOnAction(event -> {
             masterDetailSource.insercaoRegistroDetalhe(ferramentasInicialDetalhe);
         });
@@ -83,7 +83,7 @@ public class FormDetail implements MasterEventListener, DetailEventListener {
         boxDetalhe.getChildren().add(tableContato);
         boxDetalhe.getChildren().add(ferramentasInicialDetalhe.createBarraInicializacao());
 
-        BarraDeStatusDetalhe status = new BarraDeStatusDetalhe();
+        DetailStatusBar status = new DetailStatusBar();
         boxDetalhe.getChildren().add(status);
         this.masterDetailSource.addDetailListener(status);
         vBox.getChildren().add(boxDetalhe);
@@ -104,17 +104,17 @@ public class FormDetail implements MasterEventListener, DetailEventListener {
     }
 
     @Override
-    public void inicioCadastro(final MasterDetailEvent e) {
+    public void startFormListener(final MasterDetailEvent e) {
         this.masterDetailSource.inicioCadastroDetalhe();
     }
 
     @Override
-    public void gravacaoRegistro(final MasterDetailEvent e) {
+    public void persistListener(final MasterDetailEvent e) {
 
     }
 
     @Override
-    public void cancelamentoRegistro(final MasterDetailEvent e) {
+    public void cancelListener(final MasterDetailEvent e) {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -124,38 +124,38 @@ public class FormDetail implements MasterEventListener, DetailEventListener {
     }
 
     @Override
-    public void insercaoRegistro(final MasterDetailEvent e) {
+    public void insertListener(final MasterDetailEvent e) {
 
     }
 
     @Override
-    public void alteracaoRegistro(final MasterDetailEvent e) {
+    public void changeItemListener(final MasterDetailEvent e) {
 
     }
 
     @Override
-    public void exclusaoRegistro(final MasterDetailEvent e) {
+    public void deleteListener(final MasterDetailEvent e) {
 
     }
 
     @Override
-    public void pesquisaRegistro(final MasterDetailEvent e) {
+    public void searchListener(final MasterDetailEvent e) {
 
-        System.out.println("ouviu o evento pesquisaRegistro em: " + this.getClass().getName());
+        System.out.println("ouviu o evento searchListener em: " + this.getClass().getName());
         //this.contatoObservableList = FXCollections.observableList( new ArrayList<Contato>());
         contatoObservableList.clear();
     }
 
     @Override
-    public void reiniciaPesquisa(final MasterDetailEvent event) {
+    public void restartSearchListener(final MasterDetailEvent event) {
         contatoObservableList.clear();
-        System.out.println("ouviu o evento reiniciaPesquisa em: " + this.getClass().getName());
+        System.out.println("ouviu o evento restartSearchListener em: " + this.getClass().getName());
     }
 
     @Override
-    public void selecaoDeIten(final MasterDetailEvent event) {
+    public void selectListener(final MasterDetailEvent event) {
 
-        System.out.println("ouviu o evento selecaoDeIten em: " + this.getClass().getName());
+        System.out.println("ouviu o evento selectListener em: " + this.getClass().getName());
         tableContato.itemsProperty().setValue(contatoObservableList);
 
         if (event.getSource() != null && event.getSource() instanceof TableView) {
@@ -202,28 +202,38 @@ public class FormDetail implements MasterEventListener, DetailEventListener {
     }
 
     @Override
-    public void insercaoRegistroDetalhe(final MasterDetailEvent e) {
-        System.out.println("ouviu o evento insercaoRegistroDetalhe em: " + this.getClass().getName());
+    public void selectDetailListener(final MasterDetailEvent event) {
+
     }
 
     @Override
-    public void alteracaoRegistroDetalhe(final MasterDetailEvent e) {
-        System.out.println("ouviu o evento alteracaoRegistroDetalhe em: " + this.getClass().getName());
+    public void restartSearchInDetails(final MasterDetailEvent event) {
+
     }
 
     @Override
-    public void exclusaoRegistroDetalhe(final MasterDetailEvent e) {
-        System.out.println("ouviu o evento exclusaoRegistroDetalhe em: " + this.getClass().getName());
+    public void insertDetailListener(final MasterDetailEvent e) {
+        System.out.println("ouviu o evento insertDetailListener em: " + this.getClass().getName());
     }
 
     @Override
-    public void pesquisaRegistroDetalhe(final MasterDetailEvent e) {
-        System.out.println("ouviu o evento pesquisaRegistroDetalhe em: " + this.getClass().getName());
+    public void changeDetailListener(final MasterDetailEvent e) {
+        System.out.println("ouviu o evento changeDetailListener em: " + this.getClass().getName());
     }
 
     @Override
-    public void gravacaoRegistroDetalhe(final MasterDetailEvent e) {
-        System.out.println("ouviu o evento gravacaoRegistroDetalhe em: " + this.getClass().getName());
+    public void deleteDetailListener(final MasterDetailEvent e) {
+        System.out.println("ouviu o evento deleteDetailListener em: " + this.getClass().getName());
+    }
+
+    @Override
+    public void searchDetailListener(final MasterDetailEvent e) {
+        System.out.println("ouviu o evento searchDetailListener em: " + this.getClass().getName());
+    }
+
+    @Override
+    public void persistDetailListener(final MasterDetailEvent e) {
+        System.out.println("ouviu o evento persistDetailListener em: " + this.getClass().getName());
         tableContato.getItems().clear();
 
         contatoObservableList.addAll(pessoa.getContatosList());
@@ -231,13 +241,13 @@ public class FormDetail implements MasterEventListener, DetailEventListener {
     }
 
     @Override
-    public void cancelamentoRegistroDetalhe(final MasterDetailEvent e) {
-        System.out.println("ouviu o evento cancelamentoRegistroDetalhe em: " + this.getClass().getName());
+    public void cancelDetailListener(final MasterDetailEvent e) {
+        System.out.println("ouviu o evento cancelDetailListener em: " + this.getClass().getName());
     }
 
     @Override
-    public void selecaoDeItenDetalhe(final MasterDetailEvent event) {
-        System.out.println(" ouvinte do evento selecaoDeItenDetalhe em:" + this.getClass().getName());
+    public void selectMasterItemListener(final MasterDetailEvent event) {
+        System.out.println(" ouvinte do evento selectMasterItemListener em:" + this.getClass().getName());
         System.out.println(" detalhe selecionado: " + event.getSource());
         entidadeDetalhe = (Contato) event.getSource();
     }
@@ -248,8 +258,8 @@ public class FormDetail implements MasterEventListener, DetailEventListener {
      * @param event
      */
     @Override
-    public void inicioCadastroDetalhe(final MasterDetailEvent event) {
-        System.out.println(" ouvinte do evento inicioCadastroDetalhe em:" + this.getClass().getName());
+    public void startNewDetailListener(final MasterDetailEvent event) {
+        System.out.println(" ouvinte do evento startNewDetailListener em:" + this.getClass().getName());
         contatoObservableList.clear();
     }
 }

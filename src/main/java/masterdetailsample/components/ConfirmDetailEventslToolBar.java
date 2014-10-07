@@ -10,7 +10,7 @@ import masterdetailsample.types.FormState;
 /**
  * Created by ton on 9/26/14.
  */
-public class ToolBarFinalDetalhe implements DetailEventListener {
+public class ConfirmDetailEventslToolBar implements DetailEventListener {
 
     private final MasterDetailEventSource masterDetailSource;
     private FormState formState;
@@ -28,7 +28,7 @@ public class ToolBarFinalDetalhe implements DetailEventListener {
     }
 
     @Override
-    public void insercaoRegistroDetalhe(final MasterDetailEvent e) {
+    public void insertDetailListener(final MasterDetailEvent e) {
         this.formState = FormState.INSERINDO_DETALHE;
 
         this.salvar.disableProperty().set(false);
@@ -36,7 +36,7 @@ public class ToolBarFinalDetalhe implements DetailEventListener {
     }
 
     @Override
-    public void alteracaoRegistroDetalhe(final MasterDetailEvent e) {
+    public void changeDetailListener(final MasterDetailEvent e) {
         this.formState = FormState.EDITANDO_DETALHE;
 
         this.salvar.disableProperty().set(false);
@@ -44,14 +44,14 @@ public class ToolBarFinalDetalhe implements DetailEventListener {
     }
 
     @Override
-    public void exclusaoRegistroDetalhe(final MasterDetailEvent e) {
+    public void deleteDetailListener(final MasterDetailEvent e) {
         this.formState = FormState.EXCLUINDO_DETALHE;
         this.salvar.disableProperty().set(true);
         this.cancelar.disableProperty().set(false);
     }
 
     @Override
-    public void pesquisaRegistroDetalhe(final MasterDetailEvent e) {
+    public void searchDetailListener(final MasterDetailEvent e) {
         this.formState = FormState.PESQUISANDO_ITENS_DETALHE;
 
         this.salvar.disableProperty().setValue(true);
@@ -59,7 +59,7 @@ public class ToolBarFinalDetalhe implements DetailEventListener {
     }
 
     @Override
-    public void gravacaoRegistroDetalhe(final MasterDetailEvent e) {
+    public void persistDetailListener(final MasterDetailEvent e) {
         this.formState = FormState.PROCESSANDO;
         this.salvar.disableProperty().setValue(true);
         this.cancelar.disableProperty().setValue(true);
@@ -68,31 +68,31 @@ public class ToolBarFinalDetalhe implements DetailEventListener {
     }
 
     @Override
-    public void cancelamentoRegistroDetalhe(final MasterDetailEvent e) {
+    public void cancelDetailListener(final MasterDetailEvent e) {
         this.formState = FormState.PROCESSANDO;
         this.salvar.disableProperty().setValue(true);
         this.cancelar.disableProperty().setValue(true);
     }
 
     @Override
-    public void selecaoDeIten(final MasterDetailEvent event) {
+    public void selectDetailListener(final MasterDetailEvent event) {
         this.salvar.disableProperty().set(true);
         this.cancelar.disableProperty().set(true);
     }
 
     @Override
-    public void reiniciaPesquisa(final MasterDetailEvent event) {
+    public void restartSearchInDetails(final MasterDetailEvent event) {
 
     }
 
     @Override
-    public void selecaoDeItenDetalhe(final MasterDetailEvent event) {
+    public void selectMasterItemListener(final MasterDetailEvent event) {
         this.salvar.disableProperty().set(true);
         this.cancelar.disableProperty().set(true);
     }
 
     @Override
-    public void inicioCadastroDetalhe(final MasterDetailEvent event) {
+    public void startNewDetailListener(final MasterDetailEvent event) {
         this.salvar.disableProperty().set(true);
         this.cancelar.disableProperty().set(true);
     }
@@ -104,7 +104,7 @@ public class ToolBarFinalDetalhe implements DetailEventListener {
         return this.barra;
     }
 
-    public ToolBarFinalDetalhe(final MasterDetailEventSource masterDetailSource) {
+    public ConfirmDetailEventslToolBar(final MasterDetailEventSource masterDetailSource) {
         this.masterDetailSource = masterDetailSource;
     }
 }

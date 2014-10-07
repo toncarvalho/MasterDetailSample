@@ -4,213 +4,221 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * Created by ton on 9/26/14.
+ * Classe responsável por conter os diversos listener da aplicação, implementada segundo o padrão observer deve funcionar como uma classe
+ * disparadora de eventos, até o momento responsável por controlar o disparo de eventos tanto dos formularios principais quando dos
+ * sub-formularios.
  */
 public class MasterDetailEventSource {
 
+    /**
+     * estrutura de lista que contem os metodos ouvintes para formulários principais.
+     */
     private Collection<MasterEventListener> masterEventListeners = new ArrayList<MasterEventListener>();
+    /**
+     * estrutura de lista que contém os métodos ouvintes para sub-formulários.
+     */
     private Collection<DetailEventListener> detailEventListeners = new ArrayList<DetailEventListener>();
 
     public void inicioCadastro() {
         MasterDetailEvent event = new MasterDetailEvent(this);
         for (MasterEventListener listener : cloneMasterListeners()) {
-            listener.inicioCadastro(event);
+            listener.startFormListener(event);
         }
     }
 
     public void inicioCadastro(Object source) {
         MasterDetailEvent event = new MasterDetailEvent(source);
         for (MasterEventListener listener : cloneMasterListeners()) {
-            listener.inicioCadastro(event);
+            listener.startFormListener(event);
         }
     }
 
     public void gravacaoRegistro() {
         MasterDetailEvent event = new MasterDetailEvent(this);
         for (MasterEventListener listener : cloneMasterListeners()) {
-            listener.gravacaoRegistro(event);
+            listener.persistListener(event);
         }
     }
 
     public void gravacaoRegistro(final Object source) {
         MasterDetailEvent event = new MasterDetailEvent(source);
         for (MasterEventListener listener : cloneMasterListeners()) {
-            listener.gravacaoRegistro(event);
+            listener.persistListener(event);
         }
     }
 
     public void cancelamentoRegistro(final Object source) {
         MasterDetailEvent event = new MasterDetailEvent(source);
         for (MasterEventListener listener : cloneMasterListeners()) {
-            listener.cancelamentoRegistro(event);
+            listener.cancelListener(event);
         }
     }
 
     public void cancelamentoRegistroDetalhe(final Object source) {
         MasterDetailEvent event = new MasterDetailEvent(source);
         for (DetailEventListener listener : cloneDetailListeners()) {
-            listener.cancelamentoRegistroDetalhe(event);
+            listener.cancelDetailListener(event);
         }
     }
 
     public void insercaoRegistro() {
         MasterDetailEvent event = new MasterDetailEvent(this);
         for (MasterEventListener listener : cloneMasterListeners()) {
-            listener.insercaoRegistro(event);
+            listener.insertListener(event);
         }
     }
 
     public void insercaoRegistro(final Object source) {
         MasterDetailEvent event = new MasterDetailEvent(source);
         for (MasterEventListener listener : cloneMasterListeners()) {
-            listener.insercaoRegistro(event);
+            listener.insertListener(event);
         }
     }
 
     public void alteracaoRegistro() {
         MasterDetailEvent event = new MasterDetailEvent(this);
         for (MasterEventListener listener : cloneMasterListeners()) {
-            listener.alteracaoRegistro(event);
+            listener.changeItemListener(event);
         }
     }
 
     public void alteracaoRegistro(final Object source) {
         MasterDetailEvent event = new MasterDetailEvent(source);
         for (MasterEventListener listener : cloneMasterListeners()) {
-            listener.alteracaoRegistro(event);
+            listener.changeItemListener(event);
         }
     }
 
     public void exclusaoRegistro() {
         MasterDetailEvent event = new MasterDetailEvent(this);
         for (MasterEventListener listener : cloneMasterListeners()) {
-            listener.alteracaoRegistro(event);
+            listener.changeItemListener(event);
         }
     }
 
     public void exclusaoRegistro(final Object source) {
         MasterDetailEvent event = new MasterDetailEvent(source);
         for (MasterEventListener listener : cloneMasterListeners()) {
-            listener.exclusaoRegistro(event);
+            listener.deleteListener(event);
         }
     }
 
     public void pesquisaRegistro() {
         MasterDetailEvent event = new MasterDetailEvent(this);
         for (MasterEventListener listener : cloneMasterListeners()) {
-            listener.pesquisaRegistro(event);
+            listener.searchListener(event);
         }
     }
 
     public void pesquisaRegistro(final Object source) {
         MasterDetailEvent event = new MasterDetailEvent(source);
         for (MasterEventListener listener : cloneMasterListeners()) {
-            listener.pesquisaRegistro(event);
+            listener.searchListener(event);
         }
     }
 
     public void insercaoRegistroDetalhe() {
         MasterDetailEvent event = new MasterDetailEvent(this);
         for (DetailEventListener listener : cloneDetailListeners()) {
-            listener.insercaoRegistroDetalhe(event);
+            listener.insertDetailListener(event);
         }
     }
 
     public void insercaoRegistroDetalhe(final Object source) {
         MasterDetailEvent event = new MasterDetailEvent(source);
         for (DetailEventListener listener : cloneDetailListeners()) {
-            listener.insercaoRegistroDetalhe(event);
+            listener.insertDetailListener(event);
         }
     }
 
     public void alteracaoRegistroDetalhe() {
         MasterDetailEvent event = new MasterDetailEvent(this);
         for (DetailEventListener listener : cloneDetailListeners()) {
-            listener.alteracaoRegistroDetalhe(event);
+            listener.changeDetailListener(event);
         }
     }
 
     public void alteracaoRegistroDetalhe(final Object source) {
         MasterDetailEvent event = new MasterDetailEvent(source);
         for (DetailEventListener listener : cloneDetailListeners()) {
-            listener.alteracaoRegistroDetalhe(event);
+            listener.changeDetailListener(event);
         }
     }
 
     public void exclusaoRegistroDetalhe() {
         MasterDetailEvent event = new MasterDetailEvent(this);
         for (DetailEventListener listener : cloneDetailListeners()) {
-            listener.exclusaoRegistroDetalhe(event);
+            listener.deleteDetailListener(event);
         }
     }
 
     public void exclusaoRegistroDetalhe(final Object source) {
         MasterDetailEvent event = new MasterDetailEvent(source);
         for (DetailEventListener listener : cloneDetailListeners()) {
-            listener.exclusaoRegistroDetalhe(event);
+            listener.deleteDetailListener(event);
         }
     }
 
     public void pesquisaRegistroDetalhe() {
         MasterDetailEvent event = new MasterDetailEvent(this);
         for (DetailEventListener listener : cloneDetailListeners()) {
-            listener.pesquisaRegistroDetalhe(event);
+            listener.searchDetailListener(event);
         }
     }
 
     public void inicioCadastroDetalhe() {
         MasterDetailEvent event = new MasterDetailEvent(this);
         for (DetailEventListener listener : cloneDetailListeners()) {
-            listener.inicioCadastroDetalhe(event);
+            listener.startNewDetailListener(event);
         }
     }
 
     public void gravacaoRegistroDetalhe() {
         MasterDetailEvent event = new MasterDetailEvent(this);
         for (DetailEventListener listener : cloneDetailListeners()) {
-            listener.gravacaoRegistroDetalhe(event);
+            listener.persistDetailListener(event);
         }
     }
 
     public void gravacaoRegistroDetalhe(final Object source) {
         MasterDetailEvent event = new MasterDetailEvent(source);
         for (DetailEventListener listener : cloneDetailListeners()) {
-            listener.gravacaoRegistroDetalhe(event);
+            listener.persistDetailListener(event);
         }
     }
 
     public void selecaoDeIten(final Object source) {
         MasterDetailEvent event = new MasterDetailEvent(source);
         for (MasterEventListener listener : cloneMasterListeners()) {
-            listener.selecaoDeIten(event);
+            listener.selectListener(event);
         }
     }
 
     public void selecaoDeIten() {
         MasterDetailEvent event = new MasterDetailEvent(this);
         for (MasterEventListener listener : cloneMasterListeners()) {
-            listener.selecaoDeIten(event);
+            listener.selectListener(event);
         }
     }
 
     public void selecaoDeItenDetalhe(final Object source) {
         MasterDetailEvent event = new MasterDetailEvent(source);
         for (DetailEventListener listener : cloneDetailListeners()) {
-            listener.selecaoDeItenDetalhe(event);
+            listener.selectMasterItemListener(event);
         }
     }
 
     public void selecaoDeItenDetalhe() {
         MasterDetailEvent event = new MasterDetailEvent(this);
         for (DetailEventListener listener : cloneDetailListeners()) {
-            listener.selecaoDeItenDetalhe(event);
+            listener.selectMasterItemListener(event);
         }
     }
 
     public void reiniciaPesquisa() {
         MasterDetailEvent event = new MasterDetailEvent(this);
         for (DetailEventListener listener : cloneDetailListeners()) {
-            listener.reiniciaPesquisa(event);
+            listener.restartSearchInDetails(event);
         }
     }
 

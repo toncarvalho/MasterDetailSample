@@ -7,8 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import masterdetailsample.components.BarraDeStatusDetalhe;
-import masterdetailsample.components.ToolBarFinalDetalhe;
+import masterdetailsample.components.DetailStatusBar;
+import masterdetailsample.components.ConfirmDetailEventslToolBar;
 import masterdetailsample.eventos.masterdetail.DetailEventListener;
 import masterdetailsample.eventos.masterdetail.MasterDetailEvent;
 import masterdetailsample.eventos.masterdetail.MasterDetailEventSource;
@@ -28,7 +28,7 @@ public class InterfaceCadastroDetail implements MasterEventListener, DetailEvent
     private Label lblFone = new Label("Fone:");
     private TextField edtFone = new TextField();
 
-    private BarraDeStatusDetalhe status = new BarraDeStatusDetalhe();
+    private DetailStatusBar status = new DetailStatusBar();
 
     private Contato entidade;
     private Pessoa pessoaSelecionada;
@@ -38,28 +38,28 @@ public class InterfaceCadastroDetail implements MasterEventListener, DetailEvent
         this.masterDetailSource.addDetailListener(this);
         this.masterDetailSource.addMasterListener(this);
 
-        ToolBarFinalDetalhe toolBarFinalDetalhe = new ToolBarFinalDetalhe(masterDetailSource);
+        ConfirmDetailEventslToolBar confirmDetailEventslToolBar = new ConfirmDetailEventslToolBar(masterDetailSource);
 
-        toolBarFinalDetalhe.cancelar.setOnAction(event -> {
+        confirmDetailEventslToolBar.cancelar.setOnAction(event -> {
             this.masterDetailSource.cancelamentoRegistro(entidade);
         });
 
-        this.masterDetailSource.addDetailListener(toolBarFinalDetalhe);
+        this.masterDetailSource.addDetailListener(confirmDetailEventslToolBar);
         boxSubformularioCadastro.getChildren().add(new Label("SUBFORMULÁRIO DE CADASTRO"));
 
         boxSubformularioCadastro.getChildren().add(new VBox(lblNome, edtNome));
 
         boxSubformularioCadastro.getChildren().add(new VBox(lblFone, edtFone));
 
-        boxSubformularioCadastro.getChildren().add(toolBarFinalDetalhe.createBarraFinalizacao());
+        boxSubformularioCadastro.getChildren().add(confirmDetailEventslToolBar.createBarraFinalizacao());
 
-        BarraDeStatusDetalhe status = new BarraDeStatusDetalhe();
+        DetailStatusBar status = new DetailStatusBar();
         boxSubformularioCadastro.getChildren().add(status);
         this.masterDetailSource.addDetailListener(status);
 
         boxSubformularioCadastro.setPrefSize(400, 200);
 
-        toolBarFinalDetalhe.salvar.setOnAction(event -> {
+        confirmDetailEventslToolBar.salvar.setOnAction(event -> {
 
             Map<String, Serializable> map = new TreeMap<String, Serializable>();
             map.put("pessoa", this.pessoaSelecionada);
@@ -85,42 +85,42 @@ public class InterfaceCadastroDetail implements MasterEventListener, DetailEvent
     }
 
     @Override
-    public void inicioCadastro(final MasterDetailEvent e) {
+    public void startFormListener(final MasterDetailEvent e) {
 
     }
 
     @Override
-    public void gravacaoRegistro(final MasterDetailEvent e) {
+    public void persistListener(final MasterDetailEvent e) {
 
     }
 
     @Override
-    public void cancelamentoRegistro(final MasterDetailEvent e) {
+    public void cancelListener(final MasterDetailEvent e) {
 
     }
 
     @Override
-    public void insercaoRegistro(final MasterDetailEvent e) {
+    public void insertListener(final MasterDetailEvent e) {
 
     }
 
     @Override
-    public void alteracaoRegistro(final MasterDetailEvent e) {
+    public void changeItemListener(final MasterDetailEvent e) {
 
     }
 
     @Override
-    public void exclusaoRegistro(final MasterDetailEvent e) {
+    public void deleteListener(final MasterDetailEvent e) {
 
     }
 
     @Override
-    public void pesquisaRegistro(final MasterDetailEvent e) {
+    public void searchListener(final MasterDetailEvent e) {
 
     }
 
     @Override
-    public void selecaoDeIten(final MasterDetailEvent event) {
+    public void selectListener(final MasterDetailEvent event) {
 
         if (event.getSource() != null && event.getSource() instanceof Pessoa) {
             this.pessoaSelecionada = (Pessoa) event.getSource();
@@ -130,16 +130,26 @@ public class InterfaceCadastroDetail implements MasterEventListener, DetailEvent
                 pessoaSelecionada = tablePessoas.getSelectionModel().getSelectedItems().get(0);
             }
         }
-        System.out.println(" ouviu selecaoDeIten em:" + this.getClass().getName());
+        System.out.println(" ouviu selectListener em:" + this.getClass().getName());
     }
 
     @Override
-    public void reiniciaPesquisa(final MasterDetailEvent event) {
+    public void restartSearchListener(final MasterDetailEvent event) {
 
     }
 
     @Override
-    public void insercaoRegistroDetalhe(final MasterDetailEvent e) {
+    public void selectDetailListener(final MasterDetailEvent event) {
+
+    }
+
+    @Override
+    public void restartSearchInDetails(final MasterDetailEvent event) {
+
+    }
+
+    @Override
+    public void insertDetailListener(final MasterDetailEvent e) {
         entidade = new Contato();
         edtNome.disableProperty().set(false);
         edtFone.disableProperty().set(false);
@@ -151,18 +161,18 @@ public class InterfaceCadastroDetail implements MasterEventListener, DetailEvent
     }
 
     @Override
-    public void alteracaoRegistroDetalhe(final MasterDetailEvent e) {
+    public void changeDetailListener(final MasterDetailEvent e) {
         edtNome.disableProperty().set(false);
         edtFone.disableProperty().set(false);
     }
 
     @Override
-    public void exclusaoRegistroDetalhe(final MasterDetailEvent e) {
+    public void deleteDetailListener(final MasterDetailEvent e) {
 
     }
 
     @Override
-    public void pesquisaRegistroDetalhe(final MasterDetailEvent e) {
+    public void searchDetailListener(final MasterDetailEvent e) {
 
         edtNome.textProperty().set("");
         edtNome.setPromptText("nome");
@@ -171,18 +181,18 @@ public class InterfaceCadastroDetail implements MasterEventListener, DetailEvent
     }
 
     @Override
-    public void gravacaoRegistroDetalhe(final MasterDetailEvent e) {
+    public void persistDetailListener(final MasterDetailEvent e) {
 
     }
 
     @Override
-    public void cancelamentoRegistroDetalhe(final MasterDetailEvent e) {
+    public void cancelDetailListener(final MasterDetailEvent e) {
         edtNome.disableProperty().set(true);
         edtFone.disableProperty().set(true);
     }
 
     @Override
-    public void selecaoDeItenDetalhe(final MasterDetailEvent event) {
+    public void selectMasterItemListener(final MasterDetailEvent event) {
 
         if (event.getSource() != null && event.getSource() instanceof Contato) {
             entidade = (Contato) event.getSource();
@@ -197,7 +207,7 @@ public class InterfaceCadastroDetail implements MasterEventListener, DetailEvent
     }
 
     @Override
-    public void inicioCadastroDetalhe(final MasterDetailEvent event) {
+    public void startNewDetailListener(final MasterDetailEvent event) {
 
         edtNome.disableProperty().set(true);
         edtFone.disableProperty().set(true);

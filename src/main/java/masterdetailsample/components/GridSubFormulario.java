@@ -18,42 +18,42 @@ public class GridSubFormulario implements DetailEventListener {
     private TableView<Contato> table;
 
     @Override
-    public void insercaoRegistroDetalhe(final MasterDetailEvent e) {
+    public void insertDetailListener(final MasterDetailEvent e) {
 
     }
 
     @Override
-    public void alteracaoRegistroDetalhe(final MasterDetailEvent e) {
+    public void changeDetailListener(final MasterDetailEvent e) {
 
     }
 
     @Override
-    public void exclusaoRegistroDetalhe(final MasterDetailEvent e) {
+    public void deleteDetailListener(final MasterDetailEvent e) {
 
     }
 
     @Override
-    public void pesquisaRegistroDetalhe(final MasterDetailEvent e) {
+    public void searchDetailListener(final MasterDetailEvent e) {
 
     }
 
     @Override
-    public void gravacaoRegistroDetalhe(final MasterDetailEvent e) {
+    public void persistDetailListener(final MasterDetailEvent e) {
 
     }
 
     @Override
-    public void cancelamentoRegistroDetalhe(final MasterDetailEvent e) {
+    public void cancelDetailListener(final MasterDetailEvent e) {
 
     }
 
     @Override
-    public void selecaoDeIten(final MasterDetailEvent event) {
+    public void selectDetailListener(final MasterDetailEvent event) {
 
     }
 
     @Override
-    public void reiniciaPesquisa(final MasterDetailEvent event) {
+    public void restartSearchInDetails(final MasterDetailEvent event) {
 
         Platform.runLater(new Runnable() {
             @Override
@@ -65,12 +65,12 @@ public class GridSubFormulario implements DetailEventListener {
     }
 
     @Override
-    public void selecaoDeItenDetalhe(final MasterDetailEvent event) {
+    public void selectMasterItemListener(final MasterDetailEvent event) {
 
     }
 
     @Override
-    public void inicioCadastroDetalhe(final MasterDetailEvent event) {
+    public void startNewDetailListener(final MasterDetailEvent event) {
 
     }
 

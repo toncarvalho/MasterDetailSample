@@ -9,8 +9,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToolBar;
 import javafx.scene.layout.VBox;
-import masterdetailsample.components.ToolBarInicialMaster;
-import masterdetailsample.components.BarraDeStatusMaster;
+import masterdetailsample.components.StartMasterEventsToolBar;
+import masterdetailsample.components.MasterStatusBar;
 import masterdetailsample.components.Grid;
 import masterdetailsample.eventos.masterdetail.MasterDetailEvent;
 import masterdetailsample.eventos.masterdetail.MasterDetailEventSource;
@@ -46,14 +46,14 @@ public class InterfacePesquisaMaster implements MasterEventListener {
 
         table = grid.getTable();
 
-        ToolBarInicialMaster ferramentasJanelaPesquisa = new ToolBarInicialMaster(masterDetailSource);
+        StartMasterEventsToolBar ferramentasJanelaPesquisa = new StartMasterEventsToolBar(masterDetailSource);
         ferramentasJanelaPesquisa.novo.setOnAction(event -> {
             masterDetailSource.insercaoRegistro(ferramentasJanelaPesquisa);
         });
 
         ferramentasJanelaPesquisa.alterar.setOnAction(event -> {
 
-            //masterDetailSource.alteracaoRegistro(table.getSelectionModel().selectedItemProperty().get());
+            //masterDetailSource.changeItemListener(table.getSelectionModel().selectedItemProperty().get());
             if (entidade != null) {
                 masterDetailSource.alteracaoRegistro(entidade);
             } else {
@@ -82,7 +82,7 @@ public class InterfacePesquisaMaster implements MasterEventListener {
         interfacePesquisa.getChildren().add(table);
         interfacePesquisa.getChildren().add(ferramentasJanelaPesquisa.createBarraInicializacao());
 
-        BarraDeStatusMaster status = new BarraDeStatusMaster();
+        MasterStatusBar status = new MasterStatusBar();
         interfacePesquisa.getChildren().add(status);
         this.masterDetailSource.addMasterListener(status);
         interfacePesquisa.setPrefSize(350, 200);
@@ -112,17 +112,17 @@ public class InterfacePesquisaMaster implements MasterEventListener {
     }
 
     @Override
-    public void inicioCadastro(final MasterDetailEvent e) {
+    public void startFormListener(final MasterDetailEvent e) {
 
     }
 
     @Override
-    public void gravacaoRegistro(final MasterDetailEvent e) {
+    public void persistListener(final MasterDetailEvent e) {
 
     }
 
     @Override
-    public void cancelamentoRegistro(final MasterDetailEvent e) {
+    public void cancelListener(final MasterDetailEvent e) {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -132,22 +132,22 @@ public class InterfacePesquisaMaster implements MasterEventListener {
     }
 
     @Override
-    public void insercaoRegistro(final MasterDetailEvent e) {
+    public void insertListener(final MasterDetailEvent e) {
 
     }
 
     @Override
-    public void alteracaoRegistro(final MasterDetailEvent e) {
+    public void changeItemListener(final MasterDetailEvent e) {
 
     }
 
     @Override
-    public void exclusaoRegistro(final MasterDetailEvent e) {
+    public void deleteListener(final MasterDetailEvent e) {
 
     }
 
     @Override
-    public void pesquisaRegistro(final MasterDetailEvent e) {
+    public void searchListener(final MasterDetailEvent e) {
 
         Platform.runLater(new Runnable() {
             @Override
@@ -160,7 +160,7 @@ public class InterfacePesquisaMaster implements MasterEventListener {
     }
 
     @Override
-    public void selecaoDeIten(final MasterDetailEvent event) {
+    public void selectListener(final MasterDetailEvent event) {
         System.out.println(this.getClass().getName() + " selecionando item");
         if (event.getSource() != null && event.getSource() instanceof TableView) {
             TableView<Pessoa> table = (TableView<Pessoa>) event.getSource();
@@ -173,7 +173,7 @@ public class InterfacePesquisaMaster implements MasterEventListener {
     }
 
     @Override
-    public void reiniciaPesquisa(final MasterDetailEvent event) {
+    public void restartSearchListener(final MasterDetailEvent event) {
 
     }
 }
