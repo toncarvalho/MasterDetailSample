@@ -1,7 +1,9 @@
 package masterdetailsample.services;
 
+import java.io.Serializable;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 import javafx.application.Platform;
 import masterdetailsample.eventos.masterdetail.DetailEventListener;
@@ -167,44 +169,32 @@ public class BackEndService implements MasterEventListener, DetailEventListener 
     public void gravacaoRegistroDetalhe(final MasterDetailEvent e) {
         System.out.println("ouviu o evento gravacaoRegistroDetalhe em: " + this.getClass().getName());
 
-        System.out.println(" gravou!!!");
+        Map<String, Serializable> map = (Map<String, Serializable>) e.getSource();
+        Pessoa pessoa = (Pessoa) map.get("pessoa");
+        Contato contato = (Contato) map.get("contato");
+        /**
+         * Quando o id do contato é nulo, então o contato é novo, caso contrário esta ocorrendo uma atualização.
+         */
 
+        if (contato.getId() == null) {
+            Pessoa persistente = DataBase.getInstance().tbPessoas.stream().filter(Predicate.isEqual(pessoa)).findFirst().get();
+            persistente.getContatosList().sort(Comparator.comparingLong(obj -> obj.getId()));
+            Contato ultimo = persistente.getContatosList().get(persistente.getContatosList().size() - 1);
+            Long novoId = ultimo.getId() + 1;
+            contato.setId(novoId);
 
-    /*    Pessoa novo = (Pessoa) e.getSource();
-        if (novo.getId() == null) {
-            novo.setId(DataBase.getInstance().tbPessoas.stream().count() + 1);
-            DataBase.getInstance().tbPessoas.sort(Comparator.comparingLong(obj -> obj.getId()));
-
-            Long novoId = (DataBase.getInstance().tbPessoas.get(DataBase.getInstance().tbPessoas.size() - 1).getId() + 1);
-            novo.setId(novoId);
-            DataBase.getInstance().tbPessoas.add(novo);
-            eventSource.pesquisaRegistro();
+            pessoa.getContatosList().add(contato);
+            persistente = pessoa;
         } else {
-            List<Pessoa> pessoas = DataBase.getInstance().tbPessoas;
-            Pessoa antigo = pessoas.stream().filter(Predicate.isEqual(novo)).findFirst().get();
-            antigo.setId(novo.getId());
-            antigo.setNome(novo.getNome());
-            antigo.setFone(novo.getFone());
-            antigo.setEmail(novo.getEmail());
-            eventSource.pesquisaRegistro();
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    eventSource.selecaoDeIten(antigo);
-                }
-            });
+            Pessoa persistente = DataBase.getInstance().tbPessoas.stream().filter(Predicate.isEqual(pessoa)).findFirst().get();
+            persistente.getContatosList().sort(Comparator.comparingLong(obj -> obj.getId()));
+            Contato contatoAntigo = persistente.getContatosList().stream().filter(Predicate.isEqual(contato)).findFirst().get();
+            contatoAntigo.setId(contato.getId());
+            contatoAntigo.setNome(contato.getNome());
+            contatoAntigo.setFone(contato.getFone());
+            persistente = pessoa;
         }
-
-        System.out.println(" Lista completa de registros ");
-
-        DataBase.getInstance().tbPessoas.forEach(pessoa -> {
-            System.out.println(pessoa);
-        });
-
-        estadoInterno = FormState.INICIAL;*/
-
-        Contato contato = (Contato) e.getSource();
-
+        System.out.println(" gravou!!!");
         Platform.runLater(new Runnable() {
             @Override
             public void run() {

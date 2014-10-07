@@ -34,6 +34,7 @@ public class FormDetail implements MasterEventListener, DetailEventListener {
     private Contato entidadeDetalhe;
 
     private ObservableList<Contato> contatoObservableList = FXCollections.observableArrayList();
+    private Pessoa pessoa;
 
     public FormDetail(final MasterDetailEventSource masterDetailSource) {
         this.estado = FormState.INICIAL;
@@ -160,7 +161,7 @@ public class FormDetail implements MasterEventListener, DetailEventListener {
         if (event.getSource() != null && event.getSource() instanceof TableView) {
             TableView<Pessoa> tablePessoas = (TableView<Pessoa>) event.getSource();
             if (tablePessoas.getSelectionModel().getSelectedItem() != null) {
-                Pessoa pessoa = tablePessoas.getSelectionModel().getSelectedItems().get(0);
+                pessoa = tablePessoas.getSelectionModel().getSelectedItems().get(0);
                 System.out.println(" contatos da pessoa: " + pessoa.getNome());
                 pessoa.getContatosList().stream().forEach(obj -> {
                     System.out.println(obj);
@@ -179,7 +180,7 @@ public class FormDetail implements MasterEventListener, DetailEventListener {
                 }
             }
         } else if (event.getSource() != null && event.getSource() instanceof Pessoa) {
-            Pessoa pessoa = (Pessoa) event.getSource();
+            pessoa = (Pessoa) event.getSource();
             System.out.println(" contatos da pessoa: " + pessoa.getNome());
             pessoa.getContatosList().stream().forEach(obj -> {
                 System.out.println(obj);
@@ -223,6 +224,10 @@ public class FormDetail implements MasterEventListener, DetailEventListener {
     @Override
     public void gravacaoRegistroDetalhe(final MasterDetailEvent e) {
         System.out.println("ouviu o evento gravacaoRegistroDetalhe em: " + this.getClass().getName());
+        tableContato.getItems().clear();
+
+        contatoObservableList.addAll(pessoa.getContatosList());
+
     }
 
     @Override
@@ -235,7 +240,6 @@ public class FormDetail implements MasterEventListener, DetailEventListener {
         System.out.println(" ouvinte do evento selecaoDeItenDetalhe em:" + this.getClass().getName());
         System.out.println(" detalhe selecionado: " + event.getSource());
         entidadeDetalhe = (Contato) event.getSource();
-
     }
 
     /**

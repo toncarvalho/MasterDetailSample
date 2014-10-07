@@ -1,6 +1,10 @@
 package masterdetailsample.screens;
 
+import java.io.Serializable;
+import java.util.Map;
+import java.util.TreeMap;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import masterdetailsample.components.BarraDeStatusDetalhe;
@@ -8,12 +12,14 @@ import masterdetailsample.components.ToolBarFinalDetalhe;
 import masterdetailsample.eventos.masterdetail.DetailEventListener;
 import masterdetailsample.eventos.masterdetail.MasterDetailEvent;
 import masterdetailsample.eventos.masterdetail.MasterDetailEventSource;
+import masterdetailsample.eventos.masterdetail.MasterEventListener;
 import masterdetailsample.model.Contato;
+import masterdetailsample.model.Pessoa;
 
 /**
  * Interface de cadastro de subformulário.
  */
-public class InterfaceCadastroDetail implements DetailEventListener {
+public class InterfaceCadastroDetail implements MasterEventListener, DetailEventListener {
 
     private VBox boxSubformularioCadastro = new VBox();
     private MasterDetailEventSource masterDetailSource;
@@ -25,10 +31,12 @@ public class InterfaceCadastroDetail implements DetailEventListener {
     private BarraDeStatusDetalhe status = new BarraDeStatusDetalhe();
 
     private Contato entidade;
+    private Pessoa pessoaSelecionada;
 
     public InterfaceCadastroDetail(final MasterDetailEventSource masterDetailSource) {
         this.masterDetailSource = masterDetailSource;
         this.masterDetailSource.addDetailListener(this);
+        this.masterDetailSource.addMasterListener(this);
 
         ToolBarFinalDetalhe toolBarFinalDetalhe = new ToolBarFinalDetalhe(masterDetailSource);
 
@@ -52,12 +60,21 @@ public class InterfaceCadastroDetail implements DetailEventListener {
         boxSubformularioCadastro.setPrefSize(400, 200);
 
         toolBarFinalDetalhe.salvar.setOnAction(event -> {
-            if (entidade != null) {
+
+            Map<String, Serializable> map = new TreeMap<String, Serializable>();
+            map.put("pessoa", this.pessoaSelecionada);
+
+            if (entidade == null) {
+                entidade = new Contato();
                 entidade.setNome(edtNome.textProperty().getValue());
                 entidade.setFone(edtFone.textProperty().getValue());
-                this.masterDetailSource.gravacaoRegistroDetalhe(entidade);
+                map.put("contato", this.entidade);
+                this.masterDetailSource.gravacaoRegistroDetalhe(map);
             } else {
-                System.out.println(" Não há contato selecionado, selecione um contato e repita a operação!!!");
+                entidade.setNome(edtNome.textProperty().getValue());
+                entidade.setFone(edtFone.textProperty().getValue());
+                map.put("contato", this.entidade);
+                this.masterDetailSource.gravacaoRegistroDetalhe(map);
             }
         });
     }
@@ -68,8 +85,52 @@ public class InterfaceCadastroDetail implements DetailEventListener {
     }
 
     @Override
+    public void inicioCadastro(final MasterDetailEvent e) {
+
+    }
+
+    @Override
+    public void gravacaoRegistro(final MasterDetailEvent e) {
+
+    }
+
+    @Override
+    public void cancelamentoRegistro(final MasterDetailEvent e) {
+
+    }
+
+    @Override
+    public void insercaoRegistro(final MasterDetailEvent e) {
+
+    }
+
+    @Override
+    public void alteracaoRegistro(final MasterDetailEvent e) {
+
+    }
+
+    @Override
+    public void exclusaoRegistro(final MasterDetailEvent e) {
+
+    }
+
+    @Override
+    public void pesquisaRegistro(final MasterDetailEvent e) {
+
+    }
+
+    @Override
     public void selecaoDeIten(final MasterDetailEvent event) {
 
+        if (event.getSource() != null && event.getSource() instanceof Pessoa) {
+            this.pessoaSelecionada = (Pessoa) event.getSource();
+        } else if (event.getSource() != null && event.getSource() instanceof TableView) {
+            TableView<Pessoa> tablePessoas = (TableView<Pessoa>) event.getSource();
+            if (tablePessoas.getSelectionModel().getSelectedItem() != null) {
+                pessoaSelecionada = tablePessoas.getSelectionModel().getSelectedItems().get(0);
+            }
+        }
+        System.out.println(" ouviu selecaoDeIten em:" + this.getClass().getName());
     }
 
     @Override
