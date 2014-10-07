@@ -1,7 +1,9 @@
-package masterdetailsample.model;
+package masterdetailsample.backEndApplication;
 
 import java.util.ArrayList;
 import java.util.List;
+import masterdetailsample.model.Contato;
+import masterdetailsample.model.Pessoa;
 
 /**
  * Created by ton on 9/30/14.

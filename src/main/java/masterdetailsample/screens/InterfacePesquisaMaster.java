@@ -11,12 +11,11 @@ import javafx.scene.control.ToolBar;
 import javafx.scene.layout.VBox;
 import masterdetailsample.components.StartMasterEventsToolBar;
 import masterdetailsample.components.MasterStatusBar;
-import masterdetailsample.components.Grid;
 import masterdetailsample.eventos.masterdetail.MasterDetailEvent;
 import masterdetailsample.eventos.masterdetail.MasterDetailEventSource;
 import masterdetailsample.eventos.masterdetail.MasterEventListener;
 import masterdetailsample.model.Pessoa;
-import masterdetailsample.services.BackEndService;
+import masterdetailsample.backEndApplication.BackEndService;
 import masterdetailsample.types.FormState;
 
 /**

@@ -1,4 +1,4 @@
-package masterdetailsample.components;
+package masterdetailsample.screens;
 
 import javafx.application.Platform;
 import javafx.scene.control.SelectionMode;

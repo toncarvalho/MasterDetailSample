@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import masterdetailsample.eventos.masterdetail.MasterDetailEventSource;
 import masterdetailsample.screens.FormMaster;
 import masterdetailsample.screens.InterfacePesquisaMaster;
-import masterdetailsample.services.BackEndService;
+import masterdetailsample.backEndApplication.BackEndService;
 
 /**
  * Created by ton on 9/26/14.

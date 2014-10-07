@@ -1,4 +1,4 @@
-package masterdetailsample.services;
+package masterdetailsample.backEndApplication;
 
 import java.io.Serializable;
 import java.util.Comparator;
@@ -11,7 +11,6 @@ import masterdetailsample.eventos.masterdetail.MasterDetailEvent;
 import masterdetailsample.eventos.masterdetail.MasterDetailEventSource;
 import masterdetailsample.eventos.masterdetail.MasterEventListener;
 import masterdetailsample.model.Contato;
-import masterdetailsample.model.DataBase;
 import masterdetailsample.model.Pessoa;
 import masterdetailsample.types.FormState;
 

@@ -10,7 +10,6 @@ import javafx.scene.control.Separator;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
 import masterdetailsample.components.DetailStatusBar;
-import masterdetailsample.components.GridSubFormulario;
 import masterdetailsample.components.StartDetailEventsToolBar;
 import masterdetailsample.eventos.masterdetail.DetailEventListener;
 import masterdetailsample.eventos.masterdetail.MasterDetailEvent;
